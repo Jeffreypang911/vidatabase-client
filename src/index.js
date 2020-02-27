@@ -15,7 +15,8 @@ import {
   VI_TYPE_LIST,
   POLICE_OFFICER_LIST,
   POLICE_VEHICLE_LIST,
-  YES_NO_LIST
+  YES_NO_LIST,
+  TICKET_TYPE_LIST
 } from "./consts.js";
 
 class App extends Component {
@@ -30,12 +31,9 @@ class App extends Component {
       policeVehicle: "",
       policeAgression: "",
       measuringEquipment: "",
+      isBrakesChecked: false,
+      isCouplingDevicesChecked: false,
 
-      number: "",
-      description: "",
-      job: "",
-      country: "",
-      agreement: false,
       // isAgreementChecked: false,
       hasFirstNameError: true,
       hasLastNameError: true,
@@ -75,7 +73,9 @@ class App extends Component {
       infractionType,
       policeOfficer,
       policeVehicle,
-      measuringEquipment
+      measuringEquipment,
+      isBrakesChecked,
+      isCouplingDevicesChecked
     } = this.state;
     if (
       !hasFirstNameError &&
@@ -95,7 +95,9 @@ class App extends Component {
         infractionType,
         policeOfficer,
         policeVehicle,
-        measuringEquipment
+        measuringEquipment,
+        isBrakesChecked,
+        isCouplingDevicesChecked
       );
       alert("yayyyy");
     }
@@ -111,6 +113,8 @@ class App extends Component {
       policeOfficer,
       policeVehicle,
       measuringEquipment,
+      isBrakesChecked,
+      isCouplingDevicesChecked,
 
       description,
       agreement,
@@ -407,6 +411,57 @@ class App extends Component {
                       name: "answer", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
                       check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
                       required: true // Optional.[Bool].Default: true. To determin if it is a required field.
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span
+                    className="icon icon-assignment-late"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  &nbsp;
+                  <span style={labelContentStyle}>Defect/Violation</span>
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <Checkbox
+                    checked={isBrakesChecked}
+                    onBlur={() => {}}
+                    onChange={(isBrakesChecked, e) => {
+                      this.setState({ isBrakesChecked });
+                    }}
+                    labelHtml={
+                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                        Brakes
+                      </div>
+                    }
+                    validationOption={{
+                      check: false,
+                      required: false
+                    }}
+                  />
+                  <Checkbox
+                    checked={isCouplingDevicesChecked}
+                    onBlur={() => {}}
+                    onChange={(isCouplingDevicesChecked, e) => {
+                      this.setState({ isCouplingDevicesChecked });
+                    }}
+                    labelHtml={
+                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                        Coupling Devices
+                      </div>
+                    }
+                    validationOption={{
+                      check: false,
+                      required: false
                     }}
                   />
                 </div>

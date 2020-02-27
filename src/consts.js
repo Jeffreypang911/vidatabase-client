@@ -28,6 +28,7 @@ export const POLICE_OFFICER_LIST = [
   { id: "Bercic", name: "Bercic" },
   { id: "Colville", name: "Colville" },
   { id: "Shea", name: "Shea" },
+  { id: "Kim", name: "Kim" },
   { id: "Other", name: "Other" }
 ];
 
