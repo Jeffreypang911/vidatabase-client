@@ -10,7 +10,12 @@ import {
 import "react-inputs-validation/lib/react-inputs-validation.min.css";
 import "./styles.css";
 
-import { COUNTRY_OPTIONS_LIST, JOB_OPTIONS_LIST } from "./consts.js";
+import {
+  COUNTRY_OPTIONS_LIST,
+  VI_TYPE_LIST,
+  POLICE_OFFICER_LIST,
+  POLICE_VEHICLE_LIST
+} from "./consts.js";
 
 class App extends Component {
   constructor(props) {
@@ -19,19 +24,25 @@ class App extends Component {
       firstName: "",
       lastName: "",
       ticketNumber: "",
-      issuingOfficer: "",
+      infractionType: "",
+      policeOfficer: "",
+      policeVehicle: "",
+
       number: "",
       description: "",
       job: "",
       country: "",
       agreement: false,
-      isAgreementChecked: false,
+      // isAgreementChecked: false,
       hasFirstNameError: true,
       hasLastNameError: true,
-      // hasNameError: true,
+      hasTicketNumberError: true,
+      hasInfractionTypeError: true,
+      hasPoliceOfficerError: true,
+      hasPoliceVehicleError: true,
+
       hasDescriptionError: true,
       hasMovieError: true,
-      hasissuingOfficerError: true,
       hasAgreementError: true,
       validate: false
     };
@@ -46,25 +57,40 @@ class App extends Component {
     e.preventDefault();
     this.toggleValidating(true);
     const {
-      // name,
-      // job,
-      // country,
-      // agreement,
-      // description,
-      hasNameError,
-      hasDescriptionError,
-      hasMovieError,
-      hasJobError,
-      hasAgreementError
+      hasFirstNameError,
+      hasLastNameError,
+      hasTicketNumberError,
+      hasInfractionTypeError,
+      hasPoliceOfficerError,
+      hasPoliceVehicleError,
+      firstName,
+      lastName,
+      ticketNumber,
+      infractionType,
+      policeOfficer,
+      policeVehicle
     } = this.state;
     if (
-      !hasNameError &&
-      !hasDescriptionError &&
-      !hasMovieError &&
-      !hasJobError &&
-      !hasAgreementError
+      !hasFirstNameError &&
+      !hasLastNameError &&
+      !hasTicketNumberError &&
+      !hasPoliceOfficerError &&
+      !hasPoliceVehicleError &&
+      !hasInfractionTypeError
+      // !hasDescriptionError &&
+      // !hasMovieError &&
+      // !hasJobError &&
+      // !hasAgreementError
     ) {
-      alert("All validated!");
+      console.log(
+        firstName,
+        lastName,
+        ticketNumber,
+        infractionType,
+        policeOfficer,
+        policeVehicle
+      );
+      alert("yayyyy");
     }
   }
 
@@ -74,7 +100,9 @@ class App extends Component {
       lastName,
       firstName,
       ticketNumber,
-      issuingOfficer,
+      infractionType,
+      policeOfficer,
+      policeVehicle,
       description,
       agreement,
       isAgreementChecked,
@@ -134,7 +162,6 @@ class App extends Component {
                   &nbsp;
                   <span style={labelContentStyle}>Name</span>
                 </div>
-
                 <div style={{ flex: "6 6 0px", margin: "10px" }}>
                   <Textbox
                     attributesWrapper={{}}
@@ -145,28 +172,20 @@ class App extends Component {
                       placeholder: "First Name"
                     }}
                     value={firstName} // Optional.[String].Default: "".
-                    disabled={false} // Optional.[Bool].Default: false.
-                    validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
+                    validate={validate} //is it validating? Boolen
                     validationCallback={res =>
-                      this.setState({ hasNameError: res, validate: false })
+                      this.setState({ hasFirstNameError: res, validate: false })
                     }
-                    onChange={(name, e) => {
-                      this.setState({ name });
-                      console.log(e);
-                    }} // Required.[Func].Default: () => {}. Will return the value.
-                    onBlur={e => {
-                      console.log(e);
-                    }} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
-                    // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
-                    // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
+                    onChange={(firstName, e) => {
+                      this.setState({ firstName });
+                    }}
                     validationOption={{
-                      name: "First Name", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
-                      check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
-                      required: true // Optional.[Bool].Default: true. To determin if it is a required field.
+                      name: "First Name", // To display in the Error message. i.e Please enter your ${name}.
+                      check: true, // To determin if you need to validate.
+                      required: true // To determin if it is a required field.
                     }}
                   />
                 </div>
-
                 <div style={{ flex: "6 6 0px", margin: "10px" }}>
                   <Textbox
                     attributesWrapper={{}}
@@ -177,19 +196,17 @@ class App extends Component {
                       placeholder: "Last Name"
                     }}
                     value={lastName} // Optional.[String].Default: "".
-                    disabled={false} // Optional.[Bool].Default: false.
-                    validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
+                    validate={validate} //is it validating? Boolen
                     validationCallback={res =>
                       this.setState({ hasLastNameError: res, validate: false })
                     }
                     onChange={(lastName, e) => {
                       this.setState({ lastName });
-                      console.log(e);
                     }}
                     validationOption={{
-                      name: "Last Name", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
-                      check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
-                      required: true // Optional.[Bool].Default: true. To determin if it is a required field.
+                      name: "Last Name", // To display in the Error message. i.e Please enter your ${name}.
+                      check: true, // To determin if you need to validate.
+                      required: true // To determin if it is a required field.
                     }}
                   />
                 </div>
@@ -221,22 +238,54 @@ class App extends Component {
                       placeholder: "Ticket Number"
                     }}
                     value={ticketNumber} // Optional.[String].Default: "".
-                    disabled={false} // Optional.[Bool].Default: false.
-                    validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
+                    validate={validate} //is it validating? Boolen
                     validationCallback={res =>
-                      this.setState({ hasNameError: res, validate: false })
+                      this.setState({
+                        hasTicketNumberError: res,
+                        validate: false
+                      })
                     }
                     onChange={(ticketNumber, e) => {
                       this.setState({ ticketNumber });
-                      console.log(e);
-                    }} // Required.[Func].Default: () => {}. Will return the value.
-                    onBlur={e => {
-                      console.log(e);
-                    }} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
-                    // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
-                    // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
+                    }}
                     validationOption={{
-                      name: "Ticket Number", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
+                      name: "Ticket Number", // To display in the Error message. i.e Please enter your ${name}.
+                      check: true, // To determin if you need to validate.
+                      required: true // To determin if it is a required field.
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span style={labelContentStyle}>Infraction Type</span>
+                </div>
+                <div style={{ flex: "6 6 0px", display: "flex" }}>
+                  <Radiobox
+                    disabled={false}
+                    value={infractionType} // Optional.[String].Default: "".
+                    validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
+                    validationCallback={res =>
+                      this.setState({
+                        hasInfractionTypeError: res,
+                        validate: false
+                      })
+                    } // Optional.[Func].Default: none. Return the validation result.
+                    optionList={VI_TYPE_LIST}
+                    customStyleOptionListItem={{ marginRight: "20px" }} // Optional.[Object].Default: {}.
+                    onChange={(infractionType, e) => {
+                      this.setState({ infractionType });
+                      console.log(e);
+                    }}
+                    validationOption={{
+                      name: "Infraction Type", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
                       check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
                       required: true // Optional.[Bool].Default: true. To determin if it is a required field.
                     }}
@@ -252,27 +301,28 @@ class App extends Component {
                 <div
                   style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
                 >
-                  <span style={labelContentStyle}>Issuing Officer</span>
+                  <span style={labelContentStyle}>Peace Officer</span>
                 </div>
                 <div style={{ flex: "6 6 0px", display: "flex" }}>
                   <Radiobox
                     disabled={false}
-                    value={issuingOfficer} // Optional.[String].Default: "".
+                    value={policeOfficer} // Optional.[String].Default: "".
                     validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
                     validationCallback={res =>
                       this.setState({
-                        hasissuingOfficerError: res,
+                        hasPoliceOfficerError: res,
                         validate: false
                       })
                     } // Optional.[Func].Default: none. Return the validation result.
-                    optionList={JOB_OPTIONS_LIST}
+                    optionList={POLICE_OFFICER_LIST}
                     customStyleOptionListItem={{ marginRight: "20px" }} // Optional.[Object].Default: {}.
-                    onChange={(issuingOfficer, e) => {
-                      this.setState({ issuingOfficer });
+                    onChange={(policeOfficer, e) => {
+                      console.log("THIS SHOULDN'T BE FIRING");
+                      this.setState({ policeOfficer });
                       console.log(e);
                     }}
                     validationOption={{
-                      name: "Issuing Officer", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
+                      name: "Police Officer", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
                       check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
                       required: true // Optional.[Bool].Default: true. To determin if it is a required field.
                     }}
@@ -281,64 +331,79 @@ class App extends Component {
               </div>
             </div>
           </div>
-          {/* 
+
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
                 <div
                   style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
                 >
-                  <span style={labelContentStyle}>agreement</span>
+                  <span style={labelContentStyle}>Police Vehicle</span>
                 </div>
-                <div style={{ flex: "6 6 0px" }}>
-                  <Checkbox
-                    attributesWrapper={{}}
-                    attributesInput={{
-                      id: "agreement",
-                      name: "agreement"
-                    }}
-                    value={agreement} // Required.[String].Default: "".
-                    checked={isAgreementChecked} // Required.[Bool].Default: false.
-                    disabled={false} // Optional.[Bool].Default: false.
+                <div style={{ flex: "6 6 0px", display: "flex" }}>
+                  <Radiobox
+                    disabled={false}
+                    value={policeVehicle} // Optional.[String].Default: "".
                     validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
-                    validationCallback={res => {
+                    validationCallback={res =>
                       this.setState({
-                        hasAgreementError: res,
+                        hasPoliceVehicleError: res,
                         validate: false
-                      });
-                    }} // Optional.[Func].Default: none. Return the validation result.
-                    classNameWrapper="" // Optional.[String].Default: "".
-                    classNameInputBox="" // Optional.[String].Default: "".
-                    classNameContainer="" // Optional.[String].Default: "".
-                    customStyleWrapper={{}} // Optional.[Object].Default: {}.
-                    customStyleInputBox={{}} // Optional.[Object].Default: {}.
-                    customStyleContainer={{}} // Optional.[Object].Default: {}.
-                    onBlur={() => {}} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
-                    // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
-                    // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
-                    onChange={(isAgreementChecked, e) => {
-                      this.setState({ isAgreementChecked });
+                      })
+                    } // Optional.[Func].Default: none. Return the validation result.
+                    optionList={POLICE_VEHICLE_LIST}
+                    customStyleOptionListItem={{ marginRight: "20px" }} // Optional.[Object].Default: {}.
+                    onChange={(policeVehicle, e) => {
+                      this.setState({ policeVehicle });
                       console.log(e);
-                    }} // Required.[Func].Default: () => {}. Will return the value.
-                    labelHtml={
-                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
-                        agree?
-                      </div>
-                    } // Required.[Html].Default: none.
+                    }}
                     validationOption={{
-                      name: "agreement", // Optional.[String].Default: "". To display in the Error message. i.e Please check the ${name}.
+                      name: "Police Vehicle", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
                       check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
                       required: true // Optional.[Bool].Default: true. To determin if it is a required field.
-                      // showMsg: true, // Optional.[Bool].Default: true. To determin display the error message or not.
-                      // locale: 'en-US', // Optional.[String].Default: "en-US". For error message display. Current options are ['zh-CN', 'en-US']; Default is 'en-US'.
-                      // msgOnError: "Your custom error message if you provide the validationOption['msgOnError']", // Optional.[String].Default: "". Show your custom error message no matter what when it has error if it is provied.
-                      // msgOnSuccess: "Your custom success message if you provide the validationOption['msgOnSuccess']. Otherwise, it will not show, not even green border." // Optional.[String].Default: "". Show your custom success message no matter what when it has error if it is provied.
                     }}
                   />
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
+
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span style={labelContentStyle}>Police Vehicle</span>
+                </div>
+                <div style={{ flex: "6 6 0px", display: "flex" }}>
+                  <Radiobox
+                    disabled={false}
+                    value={policeVehicle} // Optional.[String].Default: "".
+                    validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
+                    validationCallback={res =>
+                      this.setState({
+                        hasPoliceVehicleError: res,
+                        validate: false
+                      })
+                    } // Optional.[Func].Default: none. Return the validation result.
+                    optionList={POLICE_VEHICLE_LIST}
+                    customStyleOptionListItem={{ marginRight: "20px" }} // Optional.[Object].Default: {}.
+                    onChange={(policeVehicle, e) => {
+                      this.setState({ policeVehicle });
+                      console.log(e);
+                    }}
+                    validationOption={{
+                      name: "Police Vehicle", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
+                      check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
+                      required: true // Optional.[Bool].Default: true. To determin if it is a required field.
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
