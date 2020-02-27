@@ -266,3 +266,36 @@ export const POLICE_VEHICLE_LIST = [
   { id: "SUV", name: "SUV" },
   { id: "Under Cover", name: "Under Cover" }
 ];
+
+export const VI_TYPE_LIST = [
+  { id: "Box1", name: "Box1" },
+  { id: "Box2", name: "Box2" },
+  { id: "Box3", name: "Box3" }
+];
+
+export const YES_NO_LIST = [
+  { id: "Yes", name: "Yes" },
+  { id: "No", name: "No" }
+];
+
+export const LENGTH_OF_TIME = [
+  { id: "10 Minutes", name: "10 Minutes" },
+  { id: "30 Minutes", name: "30 Minutes" },
+  { id: "45 Minutes", name: "45 Minutes" },
+  { id: "1 Hour", name: "1 Hour" },
+  { id: "1+ Hour", name: "1+ Hour" }
+];
+
+export const TICKET_TYPE_LIST = [
+  { id: "Brakes", name: "Brakes" },
+  { id: "Coupling Devices", name: "Coupling Devices" },
+  { id: "Exhaust", name: "Exhaust" },
+  { id: "Fuel System", name: "Fuel System" },
+  { id: "Lights", name: "Lights" },
+  { id: "Load Security", name: "Load Security" },
+  { id: "Suspension", name: "Suspension" },
+  { id: "Tires", name: "Tires" },
+  { id: "Wheels/Rims", name: "Wheels/Rims" },
+  { id: "Wipers", name: "Wipers" },
+  { id: "Other", name: "Other" }
+];
