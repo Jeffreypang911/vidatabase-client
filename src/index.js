@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import DatePicker from "react-datepicker";
+import "react-inputs-validation/lib/react-inputs-validation.min.css";
+import "./styles.css";
+import "react-datepicker/dist/react-datepicker.css";
 import {
   Textbox,
   Textarea,
@@ -7,8 +11,6 @@ import {
   Checkbox,
   Select
 } from "react-inputs-validation";
-import "react-inputs-validation/lib/react-inputs-validation.min.css";
-import "./styles.css";
 
 import {
   VI_TYPE_LIST,
@@ -44,6 +46,7 @@ class App extends Component {
       isWheelsRimsChecked: false,
       isWipersChecked: false,
       isOtherChecked: false,
+      startDate: new Date(),
 
       // isAgreementChecked: false,
       hasFirstNameError: true,
@@ -64,6 +67,12 @@ class App extends Component {
     };
     this.validateForm = this.validateForm.bind(this);
   }
+
+  handleChange = date => {
+    this.setState({
+      startDate: date
+    });
+  };
 
   toggleValidating(validate) {
     this.setState({ validate });
@@ -281,6 +290,10 @@ class App extends Component {
               </div>
             </div>
           </div>
+          <DatePicker
+            selected={this.state.startDate}
+            onChange={this.handleChange}
+          />
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
