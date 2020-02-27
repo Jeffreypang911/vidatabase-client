@@ -14,7 +14,8 @@ import {
   COUNTRY_OPTIONS_LIST,
   VI_TYPE_LIST,
   POLICE_OFFICER_LIST,
-  POLICE_VEHICLE_LIST
+  POLICE_VEHICLE_LIST,
+  YES_NO_LIST
 } from "./consts.js";
 
 class App extends Component {
@@ -27,6 +28,8 @@ class App extends Component {
       infractionType: "",
       policeOfficer: "",
       policeVehicle: "",
+      policeAgression: "",
+      measuringEquipment: "",
 
       number: "",
       description: "",
@@ -40,10 +43,12 @@ class App extends Component {
       hasInfractionTypeError: true,
       hasPoliceOfficerError: true,
       hasPoliceVehicleError: true,
+      hasPoliceAgressionError: true,
+      hasMeasuringEquipmentError: true,
 
-      hasDescriptionError: true,
-      hasMovieError: true,
-      hasAgreementError: true,
+      // hasDescriptionError: true,
+      // hasMovieError: true,
+      // hasAgreementError: true,
       validate: false
     };
     this.validateForm = this.validateForm.bind(this);
@@ -63,12 +68,14 @@ class App extends Component {
       hasInfractionTypeError,
       hasPoliceOfficerError,
       hasPoliceVehicleError,
+      hasMeasuringEquipment,
       firstName,
       lastName,
       ticketNumber,
       infractionType,
       policeOfficer,
-      policeVehicle
+      policeVehicle,
+      measuringEquipment
     } = this.state;
     if (
       !hasFirstNameError &&
@@ -76,19 +83,19 @@ class App extends Component {
       !hasTicketNumberError &&
       !hasPoliceOfficerError &&
       !hasPoliceVehicleError &&
-      !hasInfractionTypeError
-      // !hasDescriptionError &&
-      // !hasMovieError &&
-      // !hasJobError &&
-      // !hasAgreementError
+      !hasInfractionTypeError &&
+      !hasMeasuringEquipment
     ) {
+      console.log("+_+_+_+_+_+_+__+_+_+_+_+_");
+
       console.log(
         firstName,
         lastName,
         ticketNumber,
         infractionType,
         policeOfficer,
-        policeVehicle
+        policeVehicle,
+        measuringEquipment
       );
       alert("yayyyy");
     }
@@ -103,6 +110,8 @@ class App extends Component {
       infractionType,
       policeOfficer,
       policeVehicle,
+      measuringEquipment,
+
       description,
       agreement,
       isAgreementChecked,
@@ -171,6 +180,7 @@ class App extends Component {
                       type: "text",
                       placeholder: "First Name"
                     }}
+                    onBlur={() => {}}
                     value={firstName} // Optional.[String].Default: "".
                     validate={validate} //is it validating? Boolen
                     validationCallback={res =>
@@ -180,7 +190,7 @@ class App extends Component {
                       this.setState({ firstName });
                     }}
                     validationOption={{
-                      name: "First Name", // To display in the Error message. i.e Please enter your ${name}.
+                      name: "First name", // To display in the Error message. i.e Please enter your ${name}.
                       check: true, // To determin if you need to validate.
                       required: true // To determin if it is a required field.
                     }}
@@ -195,6 +205,7 @@ class App extends Component {
                       type: "text",
                       placeholder: "Last Name"
                     }}
+                    onBlur={() => {}}
                     value={lastName} // Optional.[String].Default: "".
                     validate={validate} //is it validating? Boolen
                     validationCallback={res =>
@@ -204,7 +215,7 @@ class App extends Component {
                       this.setState({ lastName });
                     }}
                     validationOption={{
-                      name: "Last Name", // To display in the Error message. i.e Please enter your ${name}.
+                      name: "Last name", // To display in the Error message. i.e Please enter your ${name}.
                       check: true, // To determin if you need to validate.
                       required: true // To determin if it is a required field.
                     }}
@@ -237,6 +248,7 @@ class App extends Component {
                       type: "text",
                       placeholder: "Ticket Number"
                     }}
+                    onBlur={() => {}}
                     value={ticketNumber} // Optional.[String].Default: "".
                     validate={validate} //is it validating? Boolen
                     validationCallback={res =>
@@ -249,7 +261,7 @@ class App extends Component {
                       this.setState({ ticketNumber });
                     }}
                     validationOption={{
-                      name: "Ticket Number", // To display in the Error message. i.e Please enter your ${name}.
+                      name: "Ticket number", // To display in the Error message. i.e Please enter your ${name}.
                       check: true, // To determin if you need to validate.
                       required: true // To determin if it is a required field.
                     }}
@@ -282,10 +294,9 @@ class App extends Component {
                     customStyleOptionListItem={{ marginRight: "20px" }} // Optional.[Object].Default: {}.
                     onChange={(infractionType, e) => {
                       this.setState({ infractionType });
-                      console.log(e);
                     }}
                     validationOption={{
-                      name: "Infraction Type", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
+                      name: "infraction type", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
                       check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
                       required: true // Optional.[Bool].Default: true. To determin if it is a required field.
                     }}
@@ -317,12 +328,10 @@ class App extends Component {
                     optionList={POLICE_OFFICER_LIST}
                     customStyleOptionListItem={{ marginRight: "20px" }} // Optional.[Object].Default: {}.
                     onChange={(policeOfficer, e) => {
-                      console.log("THIS SHOULDN'T BE FIRING");
                       this.setState({ policeOfficer });
-                      console.log(e);
                     }}
                     validationOption={{
-                      name: "Police Officer", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
+                      name: "police officer", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
                       check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
                       required: true // Optional.[Bool].Default: true. To determin if it is a required field.
                     }}
@@ -355,10 +364,9 @@ class App extends Component {
                     customStyleOptionListItem={{ marginRight: "20px" }} // Optional.[Object].Default: {}.
                     onChange={(policeVehicle, e) => {
                       this.setState({ policeVehicle });
-                      console.log(e);
                     }}
                     validationOption={{
-                      name: "Police Vehicle", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
+                      name: "police vehicle", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
                       check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
                       required: true // Optional.[Bool].Default: true. To determin if it is a required field.
                     }}
@@ -367,34 +375,36 @@ class App extends Component {
               </div>
             </div>
           </div>
-
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
                 <div
                   style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
                 >
-                  <span style={labelContentStyle}>Police Vehicle</span>
+                  <span style={labelContentStyle}>
+                    Did the officer use proper measuring equipment when giving
+                    you the VI?
+                  </span>
                 </div>
+
                 <div style={{ flex: "6 6 0px", display: "flex" }}>
                   <Radiobox
                     disabled={false}
-                    value={policeVehicle} // Optional.[String].Default: "".
+                    value={measuringEquipment} // Optional.[String].Default: "".
                     validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
                     validationCallback={res =>
                       this.setState({
-                        hasPoliceVehicleError: res,
+                        hasMeasuringEquipmentError: res,
                         validate: false
                       })
                     } // Optional.[Func].Default: none. Return the validation result.
-                    optionList={POLICE_VEHICLE_LIST}
+                    optionList={YES_NO_LIST}
                     customStyleOptionListItem={{ marginRight: "20px" }} // Optional.[Object].Default: {}.
-                    onChange={(policeVehicle, e) => {
-                      this.setState({ policeVehicle });
-                      console.log(e);
+                    onChange={measuringEquipment => {
+                      this.setState({ measuringEquipment });
                     }}
                     validationOption={{
-                      name: "Police Vehicle", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
+                      name: "answer", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
                       check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
                       required: true // Optional.[Bool].Default: true. To determin if it is a required field.
                     }}
