@@ -252,12 +252,6 @@ class App extends Component {
                 <div
                   style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
                 >
-                  {/*<div style={(labelStyle, { flex: '3 3 0px' })}>*/}
-                  <span
-                    className="icon icon-info"
-                    style={{ ...labelContentStyle, fontSize: "20px" }}
-                  />
-                  &nbsp;
                   <span style={labelContentStyle}>Issuing Officer</span>
                 </div>
                 <div style={{ flex: "6 6 0px", display: "flex" }}>
@@ -272,10 +266,6 @@ class App extends Component {
                       })
                     } // Optional.[Func].Default: none. Return the validation result.
                     optionList={JOB_OPTIONS_LIST}
-                    customStyleContainer={{
-                      display: "flex",
-                      justifyContent: "flex-start"
-                    }} // Optional.[Object].Default: {}.
                     customStyleOptionListItem={{ marginRight: "20px" }} // Optional.[Object].Default: {}.
                     onChange={(issuingOfficer, e) => {
                       this.setState({ issuingOfficer });
@@ -291,18 +281,13 @@ class App extends Component {
               </div>
             </div>
           </div>
+          {/* 
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
                 <div
                   style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
                 >
-                  {/*<div style={(labelStyle, { flex: '3 3 0px' })}>*/}
-                  <span
-                    className="icon icon-assignment-late"
-                    style={{ ...labelContentStyle, fontSize: "20px" }}
-                  />
-                  &nbsp;
                   <span style={labelContentStyle}>agreement</span>
                 </div>
                 <div style={{ flex: "6 6 0px" }}>
@@ -353,7 +338,7 @@ class App extends Component {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
