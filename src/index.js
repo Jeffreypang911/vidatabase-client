@@ -11,12 +11,12 @@ import "react-inputs-validation/lib/react-inputs-validation.min.css";
 import "./styles.css";
 
 import {
-  COUNTRY_OPTIONS_LIST,
   VI_TYPE_LIST,
   POLICE_OFFICER_LIST,
   POLICE_VEHICLE_LIST,
   YES_NO_LIST,
-  TICKET_TYPE_LIST
+  CAR_MAKE,
+  YEAR
 } from "./consts.js";
 
 class App extends Component {
@@ -26,6 +26,8 @@ class App extends Component {
       firstName: "",
       lastName: "",
       ticketNumber: "",
+      carYear: "",
+      carMake: "",
       infractionType: "",
       policeOfficer: "",
       policeVehicle: "",
@@ -33,11 +35,22 @@ class App extends Component {
       measuringEquipment: "",
       isBrakesChecked: false,
       isCouplingDevicesChecked: false,
+      isExhaustChecked: false,
+      isFuelSystemChecked: false,
+      isLightsChecked: false,
+      isLoadSecurityChecked: false,
+      isSuspensionChecked: false,
+      isTiresChecked: false,
+      isWheelsRimsChecked: false,
+      isWipersChecked: false,
+      isOtherChecked: false,
 
       // isAgreementChecked: false,
       hasFirstNameError: true,
       hasLastNameError: true,
       hasTicketNumberError: true,
+      hasCarYearError: true,
+      hasCarMakeError: true,
       hasInfractionTypeError: true,
       hasPoliceOfficerError: true,
       hasPoliceVehicleError: true,
@@ -63,6 +76,8 @@ class App extends Component {
       hasFirstNameError,
       hasLastNameError,
       hasTicketNumberError,
+      hasCarYearError,
+      hasCarMakeError,
       hasInfractionTypeError,
       hasPoliceOfficerError,
       hasPoliceVehicleError,
@@ -70,35 +85,62 @@ class App extends Component {
       firstName,
       lastName,
       ticketNumber,
+      carYear,
+      carMake,
       infractionType,
       policeOfficer,
       policeVehicle,
       measuringEquipment,
       isBrakesChecked,
-      isCouplingDevicesChecked
+      isCouplingDevicesChecked,
+      isExhaustChecked,
+      isFuelSystemChecked,
+      isLightsChecked,
+      isLoadSecurityChecked,
+      isSuspensionChecked,
+      isTiresChecked,
+      isWheelsRimsChecked,
+      isWipersChecked,
+      isOtherChecked
     } = this.state;
     if (
       !hasFirstNameError &&
       !hasLastNameError &&
       !hasTicketNumberError &&
+      !hasCarYearError &&
+      !hasCarMakeError &&
       !hasPoliceOfficerError &&
       !hasPoliceVehicleError &&
       !hasInfractionTypeError &&
       !hasMeasuringEquipment
     ) {
-      console.log("+_+_+_+_+_+_+__+_+_+_+_+_");
-
-      console.log(
-        firstName,
-        lastName,
-        ticketNumber,
-        infractionType,
-        policeOfficer,
-        policeVehicle,
-        measuringEquipment,
+      const violations = [
         isBrakesChecked,
-        isCouplingDevicesChecked
-      );
+        isCouplingDevicesChecked,
+        isExhaustChecked,
+        isFuelSystemChecked,
+        isLightsChecked,
+        isLoadSecurityChecked,
+        isSuspensionChecked,
+        isTiresChecked,
+        isWheelsRimsChecked,
+        isWipersChecked,
+        isOtherChecked
+      ];
+
+      const userData = {
+        firstName: firstName,
+        carYear: carYear,
+        carMake: carMake,
+        lastName: lastName,
+        ticketNumber: ticketNumber,
+        infractionType: infractionType,
+        policeOfficer: policeOfficer,
+        policeVehicle: policeVehicle,
+        measuringEquipment: measuringEquipment,
+        violations: violations
+      };
+      console.log(userData);
       alert("yayyyy");
     }
   }
@@ -109,12 +151,23 @@ class App extends Component {
       lastName,
       firstName,
       ticketNumber,
+      carYear,
+      carMake,
       infractionType,
       policeOfficer,
       policeVehicle,
       measuringEquipment,
       isBrakesChecked,
       isCouplingDevicesChecked,
+      isExhaustChecked,
+      isFuelSystemChecked,
+      isLightsChecked,
+      isLoadSecurityChecked,
+      isSuspensionChecked,
+      isTiresChecked,
+      isWheelsRimsChecked,
+      isWipersChecked,
+      isOtherChecked,
 
       description,
       agreement,
@@ -228,7 +281,88 @@ class App extends Component {
               </div>
             </div>
           </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span
+                    className="icon icon-bookmark"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
 
+                  <span style={labelContentStyle}>
+                    Year and Make <br></br>of Vehicle
+                  </span>
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <Select
+                    attributesInput={{
+                      id: "carYear",
+                      name: "carYear"
+                    }}
+                    value={carYear} // Optional.[String].Default: "".
+                    disabled={false} // Optional.[Bool].Default: false.
+                    showSearch={true}
+                    validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
+                    validationCallback={res =>
+                      this.setState({ hasCarYearError: res, validate: false })
+                    }
+                    optionList={YEAR}
+                    customStyleOptionListContainer={{
+                      maxHeight: "200px",
+                      overflow: "auto",
+                      fontSize: "14px"
+                    }}
+                    customStyleOptionListItem={{}} // Optional.[Object].Default: {}.
+                    onChange={(res, e) => {
+                      this.setState({ carYear: res.id });
+                      console.log(e);
+                    }} // Optional.[Func].Default: () => {}. Will return the value.
+                    onBlur={() => {}}
+                    validationOption={{
+                      name: "car year", // Optional.[String].Default: "". To display in the Error message. i.e Please select a ${name}.
+                      check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
+                      required: true // Optional.[Bool].Default: true. To determin if it is a required field.
+                    }}
+                  />
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <Select
+                    attributesInput={{
+                      id: "carMake",
+                      name: "carMake"
+                    }}
+                    value={carMake} // Optional.[String].Default: "".
+                    disabled={false} // Optional.[Bool].Default: false.
+                    showSearch={true}
+                    validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
+                    validationCallback={res =>
+                      this.setState({ hasCarMakeError: res, validate: false })
+                    }
+                    optionList={CAR_MAKE}
+                    customStyleOptionListContainer={{
+                      maxHeight: "200px",
+                      overflow: "auto",
+                      fontSize: "14px"
+                    }}
+                    customStyleOptionListItem={{}} // Optional.[Object].Default: {}.
+                    onChange={(res, e) => {
+                      this.setState({ carMake: res.id });
+                      console.log(e);
+                    }} // Optional.[Func].Default: () => {}. Will return the value.
+                    onBlur={() => {}}
+                    validationOption={{
+                      name: "car make", // Optional.[String].Default: "". To display in the Error message. i.e Please select a ${name}.
+                      check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
+                      required: true // Optional.[Bool].Default: true. To determin if it is a required field.
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
@@ -316,7 +450,7 @@ class App extends Component {
                 <div
                   style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
                 >
-                  <span style={labelContentStyle}>Peace Officer</span>
+                  <span style={labelContentStyle}>Police Officer</span>
                 </div>
                 <div style={{ flex: "6 6 0px", display: "flex" }}>
                   <Radiobox
@@ -351,7 +485,7 @@ class App extends Component {
                 <div
                   style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
                 >
-                  <span style={labelContentStyle}>Police Vehicle</span>
+                  <span style={labelContentStyle}>Police Vehicle Type</span>
                 </div>
                 <div style={{ flex: "6 6 0px", display: "flex" }}>
                   <Radiobox
@@ -464,85 +598,151 @@ class App extends Component {
                       required: false
                     }}
                   />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div style={rowWrapperStyle}>
-            <div style={rowContainerStyle}>
-              <div style={rowStyle}>
-                <div
-                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
-                >
-                  <span
-                    className="icon icon-bookmark"
-                    style={{ ...labelContentStyle, fontSize: "20px" }}
-                  />
-                  &nbsp;
-                  <span style={labelContentStyle}>country</span>
-                </div>
-                <div style={{ flex: "6 6 0px" }}>
-                  <Select
-                    attributesWrapper={{}}
-                    attributesInput={{
-                      id: "country",
-                      name: "country"
+                  <Checkbox
+                    checked={isExhaustChecked}
+                    onBlur={() => {}}
+                    onChange={(isExhaustChecked, e) => {
+                      this.setState({ isExhaustChecked });
                     }}
-                    value={country} // Optional.[String].Default: "".
-                    disabled={false} // Optional.[Bool].Default: false.
-                    showSearch={true}
-                    validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
-                    validationCallback={res =>
-                      this.setState({ hasMovieError: res, validate: false })
-                    } // Optional.[Func].Default: none. Return the validation result.
-                    optionList={COUNTRY_OPTIONS_LIST} // Required.[Array of Object(s)].Default: [].
-                    classNameSelect="" // Optional.[String].Default: "".
-                    classNameWrapper="" // Optional.[String].Default: "".
-                    classNameContainer="" // Optional.[String].Default: "".
-                    classNameOptionListContainer="" // Optional.[String].Default: "".
-                    classNameOptionListItem="" // Optional.[String].Default: "".
-                    customStyleSelect={{}} // Optional.[Object].Default: {}.
-                    customStyleWrapper={{}} // Optional.[Object].Default: {}.
-                    customStyleContainer={{}} // Optional.[Object].Default: {}.
-                    customStyleOptionListContainer={{
-                      maxHeight: "200px",
-                      overflow: "auto",
-                      fontSize: "14px"
-                    }} // Optional.[Object].Default: {}.
-                    customStyleOptionListItem={{}} // Optional.[Object].Default: {}.
-                    onChange={(res, e) => {
-                      this.setState({ country: res.id });
-                      console.log(e);
-                    }} // Optional.[Func].Default: () => {}. Will return the value.
-                    onBlur={() => {}} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
-                    // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
-                    // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
-                    // selectHtml={<div>{countryItem.name}</div>} // Optional.[Html].Default: none. The custom html that will display when user choose. Use it if you think the default html is ugly.
-                    // selectOptionListItemHtml={COUNTRY_OPTIONS_LIST.map(
-                    //   (i, k) => {
-                    //     return (
-                    //       <div
-                    //         key={k}
-                    //         onClick={() => {
-                    //           this.handleSelectChange(i.id);
-                    //         }}
-                    //       >
-                    //         <span className="icon icon-person" />{i.name}
-                    //       </div>
-                    //     );
-                    //   }
-                    // )} // Optional.[Html].Default: none. The custom select options item html that will display in dropdown list. Use it if you think the default html is ugly.
+                    labelHtml={
+                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                        Exhaust
+                      </div>
+                    }
                     validationOption={{
-                      name: "Country or Region", // Optional.[String].Default: "". To display in the Error message. i.e Please select a ${name}.
-                      check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
-                      required: true // Optional.[Bool].Default: true. To determin if it is a required field.
-                      // showMsg: true, // Optional.[Bool].Default: true. To determin display the error message or not.
-                      // locale: 'en-US', // Optional.[String].Default: "en-US". For error message display. Current options are ['zh-CN', 'en-US']; Default is 'en-US'.
-                      // msgOnError: "Your custom error message if you provide the validationOption['msgOnError']", // Optional.[String].Default: "". Show your custom error message no matter what when it has error if it is provied.
-                      // msgOnSuccess: "Your custom success message if you provide the validationOption['msgOnSuccess']. Otherwise, it will not show, not even green border." // Optional.[String].Default: "". Show your custom success message no matter what when it has error if it is provied.
+                      check: false,
+                      required: false
                     }}
                   />
+                  <Checkbox
+                    checked={isFuelSystemChecked}
+                    onBlur={() => {}}
+                    onChange={(isFuelSystemChecked, e) => {
+                      this.setState({ isFuelSystemChecked });
+                    }}
+                    labelHtml={
+                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                        Fuel System
+                      </div>
+                    }
+                    validationOption={{
+                      check: false,
+                      required: false
+                    }}
+                  />
+                  <Checkbox
+                    checked={isLightsChecked}
+                    onBlur={() => {}}
+                    onChange={(isLightsChecked, e) => {
+                      this.setState({ isLightsChecked });
+                    }}
+                    labelHtml={
+                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                        Lights
+                      </div>
+                    }
+                    validationOption={{
+                      check: false,
+                      required: false
+                    }}
+                  />
+                  <Checkbox
+                    checked={isLoadSecurityChecked}
+                    onBlur={() => {}}
+                    onChange={(isLoadSecurityChecked, e) => {
+                      this.setState({ isLoadSecurityChecked });
+                    }}
+                    labelHtml={
+                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                        Load Security
+                      </div>
+                    }
+                    validationOption={{
+                      check: false,
+                      required: false
+                    }}
+                  />
+                  <Checkbox
+                    checked={isSuspensionChecked}
+                    onBlur={() => {}}
+                    onChange={(isSuspensionChecked, e) => {
+                      this.setState({ isSuspensionChecked });
+                    }}
+                    labelHtml={
+                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                        Suspension
+                      </div>
+                    }
+                    validationOption={{
+                      check: false,
+                      required: false
+                    }}
+                  />
+                  <Checkbox
+                    checked={isTiresChecked}
+                    onBlur={() => {}}
+                    onChange={(isTiresChecked, e) => {
+                      this.setState({ isTiresChecked });
+                    }}
+                    labelHtml={
+                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                        Tires
+                      </div>
+                    }
+                    validationOption={{
+                      check: false,
+                      required: false
+                    }}
+                  />
+                  <Checkbox
+                    checked={isWheelsRimsChecked}
+                    onBlur={() => {}}
+                    onChange={(isWheelsRimsChecked, e) => {
+                      this.setState({ isWheelsRimsChecked });
+                    }}
+                    labelHtml={
+                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                        Wheels/Rims
+                      </div>
+                    }
+                    validationOption={{
+                      check: false,
+                      required: false
+                    }}
+                  />
+                  <Checkbox
+                    checked={isWipersChecked}
+                    onBlur={() => {}}
+                    onChange={(isWipersChecked, e) => {
+                      this.setState({ isWipersChecked });
+                    }}
+                    labelHtml={
+                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                        Wipers
+                      </div>
+                    }
+                    validationOption={{
+                      check: false,
+                      required: false
+                    }}
+                  />
+                  <Checkbox
+                    checked={isOtherChecked}
+                    onBlur={() => {}}
+                    onChange={(isOtherChecked, e) => {
+                      this.setState({ isOtherChecked });
+                    }}
+                    labelHtml={
+                      <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                        Other
+                      </div>
+                    }
+                    validationOption={{
+                      check: false,
+                      required: false
+                    }}
+                  />
+                  '
                 </div>
               </div>
             </div>
