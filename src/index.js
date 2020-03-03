@@ -6,6 +6,8 @@ import "./styles.css";
 // import "react-datepicker/dist/react-datepicker.css";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
+import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import { Icon } from "leaflet";
 
 import {
   Textbox,
@@ -524,7 +526,6 @@ class App extends Component {
               </div>
             </div>
           </div>
-
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
@@ -559,7 +560,6 @@ class App extends Component {
               </div>
             </div>
           </div>
-
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
@@ -594,7 +594,6 @@ class App extends Component {
               </div>
             </div>
           </div>
-
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
@@ -667,7 +666,6 @@ class App extends Component {
               </div>
             </div>
           </div>
-
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
@@ -858,6 +856,36 @@ class App extends Component {
                     }}
                   />
                   '
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span
+                    className="icon icon-assignment-late"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+                  <span style={labelContentStyle}>
+                    Please Pin where Location of the VI was given:
+                  </span>
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <link
+                    rel="stylesheet"
+                    href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"
+                  />
+
+                  <Map center={[45.4, -75.7]} zoom={12}>
+                    <TileLayer
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                  </Map>
                 </div>
               </div>
             </div>

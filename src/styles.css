@@ -30,6 +30,12 @@ body {
   cursor: pointer;
 }
 
+.leaflet-container {
+  width: 100%;
+  height: 50vh;
+  margin: 10px;
+}
+
 .sub-section-title-wrapper {
   padding: 2%;
 }
