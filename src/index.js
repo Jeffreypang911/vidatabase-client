@@ -7,8 +7,6 @@ import "./styles.css";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
-import { Icon } from "leaflet";
-
 import {
   Textbox,
   Textarea,
@@ -16,6 +14,7 @@ import {
   Checkbox,
   Select
 } from "react-inputs-validation";
+import L from "leaflet";
 
 import {
   VI_TYPE_LIST,
@@ -26,6 +25,14 @@ import {
   YEAR,
   TIME
 } from "./consts.js";
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+  iconUrl: require("leaflet/dist/images/marker-icon.png"),
+  shadowUrl: require("leaflet/dist/images/marker-shadow.png")
+});
 
 class App extends Component {
   constructor(props) {
@@ -84,6 +91,16 @@ class App extends Component {
   toggleValidating(validate) {
     this.setState({ validate });
   }
+
+  updatePosition = () => {
+    // const marker = this.refmarker.current;
+    // if (marker != null) {
+    console.log("marker");
+    // this.setState({
+    //   marker: marker.leafletElement.getLatLng()
+    // });
+    // }
+  };
 
   validateForm(e) {
     const infractionDateString = () => {
@@ -871,7 +888,8 @@ class App extends Component {
                     style={{ ...labelContentStyle, fontSize: "20px" }}
                   />
                   <span style={labelContentStyle}>
-                    Please Pin where Location of the VI was given:
+                    Please Move the Pin to Where <br></br>the Location of the VI
+                    was Given:
                   </span>
                 </div>
                 <div style={{ flex: "6 6 0px" }}>
@@ -880,11 +898,22 @@ class App extends Component {
                     href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"
                   />
 
-                  <Map center={[45.4, -75.7]} zoom={12}>
+                  <Map center={[49.25, -123.1]} zoom={12}>
                     <TileLayer
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     />
+                    <Marker
+                      position={[49.25, -123.1]}
+                      draggable={true}
+                      onDragend={this.updatePosition}
+                    >
+                      <Popup>
+                        A pretty CSS3 popup.
+                        <br />
+                        Easily customizable.
+                      </Popup>
+                    </Marker>
                   </Map>
                 </div>
               </div>
