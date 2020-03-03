@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import "react-inputs-validation/lib/react-inputs-validation.min.css";
 import "./styles.css";
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
+import DayPickerInput from "react-day-picker/DayPickerInput";
+import "react-day-picker/lib/style.css";
+
 import {
   Textbox,
   Textarea,
@@ -18,7 +21,8 @@ import {
   POLICE_VEHICLE_LIST,
   YES_NO_LIST,
   CAR_MAKE,
-  YEAR
+  YEAR,
+  TIME
 } from "./consts.js";
 
 class App extends Component {
@@ -46,7 +50,9 @@ class App extends Component {
       isWheelsRimsChecked: false,
       isWipersChecked: false,
       isOtherChecked: false,
-      startDate: new Date(),
+      infractionDate: undefined,
+      infractionTime: undefined,
+      description: "",
 
       // isAgreementChecked: false,
       hasFirstNameError: true,
@@ -66,40 +72,45 @@ class App extends Component {
       validate: false
     };
     this.validateForm = this.validateForm.bind(this);
+    this.handleDayChange = this.handleDayChange.bind(this);
   }
 
-  handleChange = date => {
-    this.setState({
-      startDate: date
-    });
-  };
+  handleDayChange(day) {
+    this.setState({ infractionDate: day });
+  }
 
   toggleValidating(validate) {
     this.setState({ validate });
   }
 
   validateForm(e) {
+    const infractionDateString = () => {
+      return this.state.infractionDate.toDateString();
+    };
     e.preventDefault();
     this.toggleValidating(true);
     const {
       hasFirstNameError,
       hasLastNameError,
       hasTicketNumberError,
+      hasinfractionTimeError,
       hasCarYearError,
       hasCarMakeError,
       hasInfractionTypeError,
       hasPoliceOfficerError,
       hasPoliceVehicleError,
-      hasMeasuringEquipment,
+      hasMeasuringEquipmentError,
       firstName,
       lastName,
       ticketNumber,
       carYear,
       carMake,
       infractionType,
+      infractionTime,
       policeOfficer,
       policeVehicle,
       measuringEquipment,
+      description,
       isBrakesChecked,
       isCouplingDevicesChecked,
       isExhaustChecked,
@@ -121,7 +132,8 @@ class App extends Component {
       !hasPoliceOfficerError &&
       !hasPoliceVehicleError &&
       !hasInfractionTypeError &&
-      !hasMeasuringEquipment
+      !hasMeasuringEquipmentError &&
+      !hasinfractionTimeError
     ) {
       const violations = [
         isBrakesChecked,
@@ -139,15 +151,18 @@ class App extends Component {
 
       const userData = {
         firstName: firstName,
+        lastName: lastName,
+        infractionDate: infractionDateString(),
+        infractionTime: infractionTime,
         carYear: carYear,
         carMake: carMake,
-        lastName: lastName,
         ticketNumber: ticketNumber,
         infractionType: infractionType,
         policeOfficer: policeOfficer,
         policeVehicle: policeVehicle,
         measuringEquipment: measuringEquipment,
-        violations: violations
+        violations: violations,
+        description: description
       };
       console.log(userData);
       alert("yayyyy");
@@ -160,6 +175,7 @@ class App extends Component {
       lastName,
       firstName,
       ticketNumber,
+      infractionTime,
       carYear,
       carMake,
       infractionType,
@@ -177,11 +193,7 @@ class App extends Component {
       isWheelsRimsChecked,
       isWipersChecked,
       isOtherChecked,
-
       description,
-      agreement,
-      isAgreementChecked,
-      country,
       validate
     } = this.state;
     const rowStyle = {
@@ -290,10 +302,6 @@ class App extends Component {
               </div>
             </div>
           </div>
-          <DatePicker
-            selected={this.state.startDate}
-            onChange={this.handleChange}
-          />
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
@@ -305,6 +313,101 @@ class App extends Component {
                     style={{ ...labelContentStyle, fontSize: "20px" }}
                   />
 
+                  <span style={labelContentStyle}>
+                    Date and Time <br></br>of Infraction
+                  </span>
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <div>
+                    <DayPickerInput
+                      onDayChange={this.handleDayChange}
+                      dayPickerProps={{
+                        month: new Date(2020, 2),
+                        showWeekNumbers: true,
+                        todayButton: "Today"
+                      }}
+                      style={{ padding: "10px" }}
+                    />
+                  </div>
+                  {/* <Select
+                    attributesInput={{
+                      id: "carYear",
+                      name: "carYear"
+                    }}
+                    value={carYear} // Optional.[String].Default: "".
+                    disabled={false} // Optional.[Bool].Default: false.
+                    showSearch={true}
+                    validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
+                    validationCallback={res =>
+                      this.setState({ hasCarYearError: res, validate: false })
+                    }
+                    optionList={YEAR}
+                    customStyleOptionListContainer={{
+                      maxHeight: "200px",
+                      overflow: "auto",
+                      fontSize: "14px"
+                    }}
+                    customStyleOptionListItem={{}} // Optional.[Object].Default: {}.
+                    onChange={(res, e) => {
+                      this.setState({ carYear: res.id });
+                      console.log(e);
+                    }} // Optional.[Func].Default: () => {}. Will return the value.
+                    onBlur={() => {}}
+                    validationOption={{
+                      name: "car year", // Optional.[String].Default: "". To display in the Error message. i.e Please select a ${name}.
+                      check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
+                      required: true // Optional.[Bool].Default: true. To determin if it is a required field.
+                    }}
+                  /> */}
+                </div>
+                <div style={{ flex: "6 6 0px" }}>
+                  <Select
+                    attributesInput={{
+                      id: "infractionTime",
+                      name: "infractionTime"
+                    }}
+                    value={infractionTime} // Optional.[String].Default: "".
+                    disabled={false} // Optional.[Bool].Default: false.
+                    showSearch={true}
+                    validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
+                    validationCallback={res =>
+                      this.setState({
+                        hasinfractionTimeError: res,
+                        validate: false
+                      })
+                    }
+                    optionList={TIME}
+                    customStyleOptionListContainer={{
+                      maxHeight: "200px",
+                      overflow: "auto",
+                      fontSize: "14px"
+                    }}
+                    customStyleOptionListItem={{}} // Optional.[Object].Default: {}.
+                    onChange={(res, e) => {
+                      this.setState({ infractionTime: res.id });
+                      console.log(e);
+                    }} // Optional.[Func].Default: () => {}. Will return the value.
+                    onBlur={() => {}}
+                    validationOption={{
+                      name: "time of infraction", // Optional.[String].Default: "". To display in the Error message. i.e Please select a ${name}.
+                      check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
+                      required: true // Optional.[Bool].Default: true. To determin if it is a required field.
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span
+                    className="icon icon-bookmark"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
                   <span style={labelContentStyle}>
                     Year and Make <br></br>of Vehicle
                   </span>
@@ -386,7 +489,7 @@ class App extends Component {
                     className="icon icon-person"
                     style={{ ...labelContentStyle, fontSize: "20px" }}
                   />
-                  &nbsp;
+
                   <span style={labelContentStyle}>Ticket Number</span>
                 </div>
 
@@ -533,7 +636,7 @@ class App extends Component {
                   style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
                 >
                   <span style={labelContentStyle}>
-                    Did the officer use proper measuring equipment when giving
+                    Did the officer use measuring <br></br>equipment when giving
                     you the VI?
                   </span>
                 </div>
@@ -575,7 +678,6 @@ class App extends Component {
                     className="icon icon-assignment-late"
                     style={{ ...labelContentStyle, fontSize: "20px" }}
                   />
-                  &nbsp;
                   <span style={labelContentStyle}>Defect/Violation</span>
                 </div>
                 <div style={{ flex: "6 6 0px" }}>
@@ -770,8 +872,9 @@ class App extends Component {
                     className="icon icon-insert-drive-file"
                     style={{ ...labelContentStyle, fontSize: "20px" }}
                   />
-                  &nbsp;
-                  <span style={labelContentStyle}>description</span>
+                  <span style={labelContentStyle}>
+                    Description of Incident <br></br> (Optional)
+                  </span>
                 </div>
                 <div style={{ flex: "6 6 0px" }}>
                   <Textarea
@@ -779,10 +882,10 @@ class App extends Component {
                     attributesInput={{
                       id: "description",
                       name: "description",
-                      placeholder: "Place your description here ^-^"
-                      // maxLength: '10',
-                      // cols: '10',
-                      // rows: '10',
+                      placeholder: "Describe What Happened",
+                      maxLength: "1000",
+                      cols: "10",
+                      rows: "7"
                     }}
                     value={description} // Optional.[String].Default: "".
                     disabled={false} // Optional.[Bool].Default: false.
@@ -791,31 +894,16 @@ class App extends Component {
                     // rows="10" // Optional.[String | Number].Default: 2.
                     placeholder="Place your description here ^-^" // Optional.[String].Default: "".
                     validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
-                    validationCallback={res =>
-                      this.setState({
-                        hasDescriptionError: res,
-                        validate: false
-                      })
-                    } // Optional.[Func].Default: none. Return the validation result.
-                    classNameInput="" // Optional.[String].Default: "".
-                    classNameWrapper="" // Optional.[String].Default: "".
-                    classNameContainer="" // Optional.[String].Default: "".
-                    customStyleInput={{}} // Optional.[Object].Default: {}.
-                    customStyleWrapper={{}} // Optional.[Object].Default: {}.
-                    customStyleContainer={{}} // Optional.[Object].Default: {}.
                     onChange={(description, e) => {
                       this.setState({ description });
-                      console.log(e);
                     }} // Required.[Func].Default: () => {}. Will return the value.
-                    onBlur={e => {
-                      console.log(e);
-                    }} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
+                    onBlur={e => {}} // Optional.[Func].Default: none. In order to validate the value on blur, you MUST provide a function, even if it is an empty function. Missing this, the validation on blur will not work.
                     // onFocus={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     // onClick={(e) => {console.log(e);}} // Optional.[Func].Default: none.
                     validationOption={{
                       name: "Description", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
                       check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
-                      required: true, // Optional.[Bool].Default: true. To determin if it is a required field.
+                      required: false, // Optional.[Bool].Default: true. To determin if it is a required field.
                       type: "string" // Optional.[String].Default: "string". Validation type, options are ['string', 'number'].
                       // showMsg: true, // Optional.[Bool].Default: true. To determin display the error message or not.
                       // locale: 'en-US', // Optional.[String].Default: "en-US". For error message display. Current options are ['zh-CN', 'en-US']; Default is 'en-US'.

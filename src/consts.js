@@ -62,6 +62,34 @@ export const CAR_MAKE = [
   { name: "Volkswagen", id: "Volkswagen" },
   { name: "Volvo", id: "Volvo" }
 ];
+
+export const TIME = [
+  { name: "7:00AM", id: "7:00AM" },
+  { name: "8:00AM", id: "8:00AM" },
+  { name: "9:00AM", id: "9:00AM" },
+  { name: "10:00AM", id: "10:00AM" },
+  { name: "11:00AM", id: "11:00AM" },
+  { name: "12:00PM", id: "12:00PM" },
+  { name: "1:00PM", id: "1:00PM" },
+  { name: "2:00PM", id: "2:00PM" },
+  { name: "3:00PM", id: "3:00PM" },
+  { name: "4:00PM", id: "4:00PM" },
+  { name: "5:00PM", id: "5:00PM" },
+  { name: "6:00PM", id: "6:00PM" },
+  { name: "7:00PM", id: "7:00PM" },
+  { name: "8:00PM", id: "8:00PM" },
+  { name: "9:00PM", id: "9:00PM" },
+  { name: "10:00PM", id: "10:00PM" },
+  { name: "11:00PM", id: "11:00PM" },
+  { name: "12:00AM", id: "12:00AM" },
+  { name: "1:00AM", id: "1:00AM" },
+  { name: "2:00AM", id: "2:00AM" },
+  { name: "3:00AM", id: "3:00AM" },
+  { name: "4:00AM", id: "4:00AM" },
+  { name: "5:00AM", id: "5:00AM" },
+  { name: "6:00AM", id: "6:00AM" }
+];
+
 export const YEAR = [
   { name: "2020", id: "2020" },
   { name: "2019", id: "2019" },
