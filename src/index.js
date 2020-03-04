@@ -492,7 +492,7 @@ class App extends Component {
                     attributesInput={{
                       id: "carDescription",
                       name: "carDescription",
-                      placeholder: "Describe Your Car",
+                      placeholder: "Describe Your Car, Mods, Etc.",
                       maxLength: "1000",
                       cols: "10",
                       rows: "3"
