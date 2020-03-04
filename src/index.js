@@ -34,6 +34,15 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png")
 });
 
+const MyMarker = props => {
+  const initMarker = ref => {
+    if (ref) {
+      ref.leafletElement.openPopup();
+    }
+  };
+  return <Marker ref={initMarker} {...props} />;
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -82,8 +91,12 @@ class App extends Component {
     };
     this.validateForm = this.validateForm.bind(this);
     this.handleDayChange = this.handleDayChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
+  handleClick(e) {
+    this.setState({ currentPos: e.latlng });
+  }
   handleDayChange(day) {
     this.setState({ infractionDate: day });
   }
@@ -95,7 +108,7 @@ class App extends Component {
   updatePosition = () => {
     // const marker = this.refmarker.current;
     // if (marker != null) {
-    console.log("marker");
+    console.log("marker", L.latLng);
     // this.setState({
     //   marker: marker.leafletElement.getLatLng()
     // });
@@ -897,8 +910,27 @@ class App extends Component {
                     rel="stylesheet"
                     href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"
                   />
-
-                  <Map center={[49.25, -123.1]} zoom={12}>
+                  <Map
+                    center={[49.25, -123.1]}
+                    zoom={12}
+                    onClick={this.handleClick}
+                  >
+                    <TileLayer
+                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                    {this.state.currentPos && (
+                      <MyMarker position={this.state.currentPos}>
+                        <Popup position={this.state.currentPos}>
+                          Current location:{" "}
+                          <pre>
+                            {JSON.stringify(this.state.currentPos, null, 2)}
+                          </pre>
+                        </Popup>
+                      </MyMarker>
+                    )}
+                  </Map>
+                  {/* <Map center={[49.25, -123.1]} zoom={12}>
                     <TileLayer
                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -914,7 +946,7 @@ class App extends Component {
                         Easily customizable.
                       </Popup>
                     </Marker>
-                  </Map>
+                  </Map> */}
                 </div>
               </div>
             </div>
