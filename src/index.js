@@ -4,7 +4,12 @@ import "react-inputs-validation/lib/react-inputs-validation.min.css";
 import "./styles.css";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
+<<<<<<< Updated upstream
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+=======
+import { Map, TileLayer, Marker, Popup } from "react-leaflet";
+
+>>>>>>> Stashed changes
 import {
   Textbox,
   Textarea,
@@ -45,6 +50,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      lat: 51.505,
+      lng: -0.09,
+      zoom: 13,
+
       firstName: "",
       lastName: "",
       ticketNumber: "",
@@ -474,6 +483,17 @@ class App extends Component {
               </div>
             </div>
           </div>
+          <Map center={[-90, 90]} zoom={this.state.zoom}>
+            <TileLayer
+              attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={[-90, 90]}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+          </Map>
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
