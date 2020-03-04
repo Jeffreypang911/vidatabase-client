@@ -71,6 +71,7 @@ class App extends Component {
       infractionDate: undefined,
       infractionTime: undefined,
       description: "",
+      currentPos: "",
 
       // isAgreementChecked: false,
       hasFirstNameError: true,
@@ -96,6 +97,7 @@ class App extends Component {
 
   handleClick(e) {
     this.setState({ currentPos: e.latlng });
+    console.log(this.state.currentPos);
   }
   handleDayChange(day) {
     this.setState({ infractionDate: day });
@@ -104,16 +106,6 @@ class App extends Component {
   toggleValidating(validate) {
     this.setState({ validate });
   }
-
-  updatePosition = () => {
-    // const marker = this.refmarker.current;
-    // if (marker != null) {
-    console.log("marker", L.latLng);
-    // this.setState({
-    //   marker: marker.leafletElement.getLatLng()
-    // });
-    // }
-  };
 
   validateForm(e) {
     const infractionDateString = () => {
@@ -142,6 +134,7 @@ class App extends Component {
       policeOfficer,
       policeVehicle,
       measuringEquipment,
+      currentPos,
       description,
       isBrakesChecked,
       isCouplingDevicesChecked,
@@ -194,6 +187,7 @@ class App extends Component {
         policeVehicle: policeVehicle,
         measuringEquipment: measuringEquipment,
         violations: violations,
+        currentPos: currentPos,
         description: description
       };
       console.log(userData);
