@@ -105,9 +105,6 @@ class SubmissionForum extends Component {
 
   validateForm(e) {
     var userRef = firebase.database().ref("users");
-    // const infractionDateString = () => {
-    //   return this.state.infractionDate.toDateString();
-    // };
     e.preventDefault();
     this.toggleValidating(true);
     const {
@@ -175,6 +172,7 @@ class SubmissionForum extends Component {
       };
 
       const userData = {
+        creationDate: new Date().getTime() / 1000,
         firstName: firstName,
         lastName: lastName,
         infractionDate: infractionDate,

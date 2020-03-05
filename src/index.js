@@ -22,8 +22,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 console.log(firebaseConfig);
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<MapDisplay />, rootElement);
-
 // const rootElement = document.getElementById("root");
-// ReactDOM.render(<SubmissionForum />, rootElement);
+// ReactDOM.render(<MapDisplay />, rootElement);
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<SubmissionForum />, rootElement);
