@@ -58,7 +58,7 @@ class SubmissionForum extends Component {
       infractionType: "",
       policeOfficer: "",
       policeVehicle: "",
-      policeAgression: "",
+      isCarStock: "",
       isBrakesChecked: false,
       isCouplingDevicesChecked: false,
       isExhaustChecked: false,
@@ -83,7 +83,7 @@ class SubmissionForum extends Component {
       hasInfractionTypeError: true,
       hasPoliceOfficerError: true,
       hasPoliceVehicleError: true,
-      hasPoliceAgressionError: true,
+      hasisCarStockError: true,
       hasMeasuringEquipmentError: true,
       validate: false
     };
@@ -120,7 +120,7 @@ class SubmissionForum extends Component {
       hasInfractionTypeError,
       hasPoliceOfficerError,
       hasPoliceVehicleError,
-      hasMeasuringEquipmentError,
+      hasisCarStockError,
       firstName,
       lastName,
       ticketNumber,
@@ -132,7 +132,7 @@ class SubmissionForum extends Component {
       infractionTime,
       policeOfficer,
       policeVehicle,
-      policeAgression,
+      isCarStock,
       currentPos,
       incidentDescription,
       instagramHandle,
@@ -157,8 +157,8 @@ class SubmissionForum extends Component {
       !hasPoliceOfficerError &&
       !hasPoliceVehicleError &&
       !hasInfractionTypeError &&
-      !hasMeasuringEquipmentError &&
-      !hasinfractionTimeError
+      !hasinfractionTimeError &&
+      !hasisCarStockError
     ) {
       const violations = {
         isBrakesChecked: isBrakesChecked,
@@ -186,7 +186,7 @@ class SubmissionForum extends Component {
         infractionType: infractionType,
         policeOfficer: policeOfficer,
         policeVehicle: policeVehicle,
-        policeAgression: policeAgression,
+        isCarStock: isCarStock,
         violations: violations,
         currentPos: currentPos,
         incidentDescription: incidentDescription,
@@ -216,7 +216,7 @@ class SubmissionForum extends Component {
       infractionType,
       policeOfficer,
       policeVehicle,
-      policeAgression,
+      isCarStock,
       isBrakesChecked,
       isCouplingDevicesChecked,
       isExhaustChecked,
@@ -671,27 +671,24 @@ class SubmissionForum extends Component {
                 <div
                   style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
                 >
-                  <span style={labelContentStyle}>
-                    Did the officer seem agressive<br></br> or angry when giving
-                    you the VI?
-                  </span>
+                  <span style={labelContentStyle}>Is Your Car Modified?</span>
                 </div>
 
                 <div style={{ flex: "6 6 0px", display: "flex" }}>
                   <Radiobox
                     disabled={false}
-                    value={policeAgression} // Optional.[String].Default: "".
+                    value={isCarStock} // Optional.[String].Default: "".
                     validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
                     validationCallback={res =>
                       this.setState({
-                        hasMeasuringEquipmentError: res,
+                        hasisCarStockError: res,
                         validate: false
                       })
                     } // Optional.[Func].Default: none. Return the validation result.
                     optionList={YES_NO_LIST}
                     customStyleOptionListItem={{ marginRight: "20px" }} // Optional.[Object].Default: {}.
-                    onChange={policeAgression => {
-                      this.setState({ policeAgression });
+                    onChange={isCarStock => {
+                      this.setState({ isCarStock });
                     }}
                     validationOption={{
                       name: "answer", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
