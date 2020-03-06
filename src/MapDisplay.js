@@ -1,17 +1,9 @@
 import React, { Component } from "react";
 import "react-inputs-validation/lib/react-inputs-validation.min.css";
 import "./styles.css";
-import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import firebase from "firebase";
-import {
-  Textbox,
-  Textarea,
-  Radiobox,
-  Checkbox,
-  Select
-} from "react-inputs-validation";
 import L from "leaflet";
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -22,84 +14,71 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png")
 });
 
-const MyMarker = props => {
-  const initMarker = ref => {
-    if (ref) {
-      ref.leafletElement.openPopup();
-    }
-  };
-  return <Marker ref={initMarker} {...props} />;
-};
+// const MyMarker = props => {
+//   const initMarker = ref => {
+//     if (ref) {
+//       ref.leafletElement.openPopup();
+//     }
+//   };
+//   return <Marker ref={initMarker} {...props} />;
+// };
 
 class MapDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lat: 51.505,
-      lng: -0.09,
-      zoom: 13,
-
-      firstName: "",
-      lastName: "",
-      ticketNumber: "",
-      carYear: "",
-      carMake: "",
-      carDescription: "",
-      infractionType: "",
-      policeOfficer: "",
-      policeVehicle: "",
-      policeAgression: "",
-      isBrakesChecked: false,
-      isCouplingDevicesChecked: false,
-      isExhaustChecked: false,
-      isFuelSystemChecked: false,
-      isLightsChecked: false,
-      isLoadSecurityChecked: false,
-      isSuspensionChecked: false,
-      isTiresChecked: false,
-      isWheelsRimsChecked: false,
-      isWipersChecked: false,
-      isOtherChecked: false,
-      infractionDate: undefined,
-      infractionTime: undefined,
-      incidentDescription: "",
-      currentPos: "",
-      instagramHandle: "",
-      hasFirstNameError: true,
-      hasLastNameError: true,
-      hasTicketNumberError: true,
-      hasCarYearError: true,
-      hasCarMakeError: true,
-      hasInfractionTypeError: true,
-      hasPoliceOfficerError: true,
-      hasPoliceVehicleError: true,
-      hasPoliceAgressionError: true,
-      hasMeasuringEquipmentError: true,
-      validate: false
+      userData: null,
+      markers: [
+        [49.25256306655601, -123.02442545527167],
+        [49.24, -123.035],
+        [49.23, -123.013]
+      ]
     };
-    this.handleDayChange = this.handleDayChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(e) {
-    this.setState({ currentPos: e.latlng });
+  //CARLO where I fetch data from Firebase
+  fetchUserData = () => {
+    const UserData = [];
+    const usersRef = firebase.database().ref("users/");
+    usersRef.orderByChild("creationDateUnix").on("child_added", function(snap) {
+      UserData.push(snap.val());
+    });
+    return UserData;
+  };
+  //CARLO was hoping below I could call set state before component mounts so data is there on time.
+  componentWillMount() {
+    this.setState({ userData: this.fetchUserData() });
   }
-  handleDayChange(day) {
-    this.setState({ infractionDate: day });
+  componentDidUpdate() {
+    console.log("YEEHAW");
   }
 
-  toggleValidating(validate) {
-    this.setState({ validate });
-  }
+  createMarkers = () => {
+    const userData = this.state.userData;
+    console.log(userData);
+    //why is this empty????!??!?!?!?
+    return (
+      this.state.userData &&
+      this.state.markers.map((position, idx) => (
+        <Marker key={`marker-${idx}`} position={position}>
+          <Popup>
+            <span>
+              A pretty CSS3 popuppp. <br /> Easily customizable.
+              {position}
+            </span>
+          </Popup>
+        </Marker>
+      ))
+    );
+  };
+
+  componentWillUpdate() {}
 
   render() {
-    const userData = firebase.database().ref("users/");
-    const usersRef = firebase.database().ref("users/");
-    console.log("_+_+_+_+__+_+__+_++_+", usersRef.toString());
-    usersRef.orderByChild("carYear").on("child_added", function(snap) {
-      console.log(snap.val().currentPos);
-    });
+    //CARLO this below logs out an empty array then the data will come in after. But it doesn't call a rerender of the new data.
+    console.log("rendering...", this.state.userData);
 
+    // const userData = this.state.userData;
     const {} = this.state;
     const rowStyle = {
       display: "flex",
@@ -143,17 +122,17 @@ class MapDisplay extends Component {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   />
-                  <MyMarker position={[49.25, -123.1]}>
-                    {/* <Popup position={this.state.currentPos}>
-                        <b>VI Location:</b>
-                        <br></br>
-                        Latatude:{" "}
-                        {JSON.stringify(this.state.currentPos.lat, null, 2)},
-                        <br></br>
-                        Longitude:{" "}
-                        {JSON.stringify(this.state.currentPos.lng, null, 2)}
-                      </Popup> */}
-                  </MyMarker>
+                  {this.state.userData[0] &&
+                    this.state.markers.map((position, idx) => (
+                      <Marker key={`marker-${idx}`} position={position}>
+                        <Popup>
+                          <span>
+                            A pretty CSS3 popuppp. <br /> Easily customizable.
+                            {position}
+                          </span>
+                        </Popup>
+                      </Marker>
+                    ))}
                 </Map>
               </div>
             </div>

@@ -172,7 +172,7 @@ class SubmissionForum extends Component {
       };
 
       const userData = {
-        creationDate: new Date().getTime() / 1000,
+        creationDateUnix: new Date().getTime() / 1000,
         firstName: firstName,
         lastName: lastName,
         infractionDate: infractionDate,
@@ -202,7 +202,6 @@ class SubmissionForum extends Component {
 
   render() {
     const {
-      // name,
       lastName,
       firstName,
       ticketNumber,
