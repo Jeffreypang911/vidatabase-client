@@ -170,7 +170,7 @@ class SubmissionForum extends Component {
         isWipersChecked: isWipersChecked,
         isOtherChecked: isOtherChecked
       };
-
+      const instagramText = instagramHandle.replace("@", "");
       const userData = {
         creationDateUnix: new Date().getTime() / 1000,
         firstName: firstName,
@@ -188,7 +188,7 @@ class SubmissionForum extends Component {
         violations: violations,
         currentPos: currentPos,
         incidentDescription: incidentDescription,
-        instagramHandle: instagramHandle
+        instagramHandle: instagramText
       };
       function writeUserData(userData) {
         var newUserRef = userRef.push();

@@ -14,72 +14,27 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png")
 });
 
-// const MyMarker = props => {
-//   const initMarker = ref => {
-//     if (ref) {
-//       ref.leafletElement.openPopup();
-//     }
-//   };
-//   return <Marker ref={initMarker} {...props} />;
-// };
-
 class MapDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userData: null,
-      markers: [
-        [49.25256306655601, -123.02442545527167],
-        [49.24, -123.035],
-        [49.23, -123.013]
-      ]
+      userData: []
     };
   }
 
-  //CARLO where I fetch data from Firebase
-  fetchUserData = () => {
-    const UserData = [];
-    const usersRef = firebase.database().ref("users/");
-    usersRef.orderByChild("creationDateUnix").on("child_added", function(snap) {
-      UserData.push(snap.val());
+  componentDidMount = () => {
+    let ref = firebase.database().ref("users/");
+    ref.once("value").then(res => {
+      // Async request to Firebase
+      if (res.val() !== undefined) {
+        const UserArry = Object.values(res.val());
+        // If response not undefined then load it to 'state'
+        this.setState({ userData: UserArry, loading: false });
+      }
     });
-    return UserData;
   };
-  //CARLO was hoping below I could call set state before component mounts so data is there on time.
-  componentWillMount() {
-    this.setState({ userData: this.fetchUserData() });
-  }
-  componentDidUpdate() {
-    console.log("YEEHAW");
-  }
-
-  createMarkers = () => {
-    const userData = this.state.userData;
-    console.log(userData);
-    //why is this empty????!??!?!?!?
-    return (
-      this.state.userData &&
-      this.state.markers.map((position, idx) => (
-        <Marker key={`marker-${idx}`} position={position}>
-          <Popup>
-            <span>
-              A pretty CSS3 popuppp. <br /> Easily customizable.
-              {position}
-            </span>
-          </Popup>
-        </Marker>
-      ))
-    );
-  };
-
-  componentWillUpdate() {}
 
   render() {
-    //CARLO this below logs out an empty array then the data will come in after. But it doesn't call a rerender of the new data.
-    console.log("rendering...", this.state.userData);
-
-    // const userData = this.state.userData;
-    const {} = this.state;
     const rowStyle = {
       display: "flex",
       alignItems: "flex-start",
@@ -113,22 +68,38 @@ class MapDisplay extends Component {
                   rel="stylesheet"
                   href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"
                 />
-                <Map
-                  center={[49.25, -123.1]}
-                  zoom={12}
-                  onClick={this.handleClick}
-                >
+                <Map center={[49.25, -123.1]} zoom={12}>
                   <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   />
-                  {this.state.userData[0] &&
-                    this.state.markers.map((position, idx) => (
-                      <Marker key={`marker-${idx}`} position={position}>
+                  {this.state.userData &&
+                    this.state.userData.map((user, idx) => (
+                      <Marker key={`marker-${idx}`} position={user.currentPos}>
                         <Popup>
                           <span>
-                            A pretty CSS3 popuppp. <br /> Easily customizable.
-                            {position}
+                            <b>Name: </b> {user.firstName} {user.lastName}
+                            <br />
+                            <b>Vehicle: </b> {user.carYear} {user.carMake}
+                            <br />
+                            <b>Vehicle Description: </b> {user.carDescription}
+                            <br />
+                            <b>Violation Type: </b> {user.infractionType}
+                            <br />
+                            <b>Police Officer: </b> {user.policeOfficer}
+                            <br />
+                            <b>Incident Description: </b>
+                            {user.incidentDescription}
+                            <br />
+                            <b>Instagram: </b>
+                            <a
+                              href={
+                                "https://www.instagram.com/" +
+                                user.instagramHandle
+                              }
+                            >
+                              @{user.instagramHandle}
+                            </a>
                           </span>
                         </Popup>
                       </Marker>
