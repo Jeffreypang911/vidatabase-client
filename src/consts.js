@@ -25,7 +25,49 @@ export const TIME_LIST = [
   "6:00AM"
 ];
 
-export const DEFAULT_ZERO = [
+export const INFRACTION_TYPE = [
+  "isBrakesChecked",
+  "isCouplingDevicesChecked",
+  "isExhaustChecked",
+  "isFuelSystemChecked:",
+  "isLightsChecked",
+  "isLoadSecurityChecked",
+  "isSuspensionChecked",
+  "isTiresChecked",
+  "isWheelsRimsChecked",
+  "isWipersChecked",
+  "isOtherChecked"
+];
+
+export const INFRACTION_LABLES = [
+  "Brakes",
+  "Coupling Devices",
+  "Exhaust",
+  "Fuel System:",
+  "Lights",
+  "Load Security",
+  "Suspension",
+  "Tires",
+  "Wheels/Rims",
+  "Wipers",
+  "Other"
+];
+
+export const DEFAULT_VALUES_INFRACTION = [
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0"
+];
+
+export const DEFAULT_VALUES_TIME = [
   "0",
   "0",
   "0",

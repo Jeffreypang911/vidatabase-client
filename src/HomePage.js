@@ -2,12 +2,17 @@ import React, { Component } from "react";
 import "react-inputs-validation/lib/react-inputs-validation.min.css";
 import "./styles.css";
 import "react-day-picker/lib/style.css";
-// import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import firebase from "firebase";
 import L from "leaflet";
 import MapDisplay from "./Components/MapDisplay";
 import ChartDisplay from "./Components/ChartDisplay";
-import { DEFAULT_ZERO, TIME_LIST } from "./consts";
+import {
+  DEFAULT_VALUES_TIME,
+  TIME_LIST,
+  INFRACTION_TYPE,
+  DEFAULT_VALUES_INFRACTION,
+  INFRACTION_LABLES
+} from "./consts";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -55,17 +60,6 @@ class HomePage extends Component {
     var hoursTicketed = [];
     var isCarModified = [];
     var violationTypes = [];
-    var violationCount = [
-      { value: "isBrakesChecked", count: 0 },
-      { value: "isCouplingDevicesChecked", count: 0 },
-      { value: "isExhaustChecked", count: 0 },
-      { value: "isFuelSystemChecked", count: 0 },
-      { value: "isLightsChecked", count: 0 },
-      { value: "isLoadSecurityChecked", count: 0 },
-      { value: "isLoadSecurityChecked", count: 0 },
-      { value: "isLoadSecurityChecked", count: 0 },
-      { value: "isLoadSecurityChecked", count: 0 }
-    ];
     //userObj.xxxxx is the actual key in the Firebase Database
     array.forEach(userObj => {
       policeVehicle.push(userObj.policeVehicle);
@@ -73,24 +67,12 @@ class HomePage extends Component {
       policeOfficers.push(userObj.policeOfficer);
       hoursTicketed.push(userObj.infractionTime);
       isCarModified.push(userObj.isCarModified);
-      // console.log(userObj.violations);
 
       for (const property in userObj.violations) {
         if (userObj.violations[property] === true) {
-          // violationCount.forEach(obj => {
-          //   if (obj.value === property) {
-          console.log("YOOOOdd", property);
-
           violationTypes.push(property);
-          // violationCount[index]
-          // obj.count
-          //   }
-          // });
-          // console.log("LOLOL", property);
         }
-        // console.log(`${property}: ${userObj.violations[property]}`);
       }
-      console.log("violationTypes", violationTypes);
     });
 
     const policeVehicleList = this.getChartData(this.arraySort(policeVehicle));
@@ -103,7 +85,7 @@ class HomePage extends Component {
     );
     const hoursTicketedList = this.getChartData(this.arraySort(hoursTicketed));
     const isCarModifiedList = this.getChartData(this.arraySort(isCarModified));
-
+    console.log("violationTypesList", violationTypesList);
     this.setState({
       policeVehicle: policeVehicleList,
       vehicleBrand: vehicleBrandList,
@@ -122,7 +104,7 @@ class HomePage extends Component {
     var current = null;
     var cnt = 0;
     for (var i = 0; i < array.length; i++) {
-      if (array[i] != current) {
+      if (array[i] !== current) {
         if (cnt > 0) {
           dataArray.push({ value: current, count: cnt });
         }
@@ -140,15 +122,14 @@ class HomePage extends Component {
 
   getChartData = sortedData => {
     //This function creates the necessary data format for charts.js.
-
     var labels = [];
     var data = [];
     //This is confusing but it is so we can display a default value of 0 people for
-    //the time of day, since charts.js does not do this automatically. The function checks if
+    //the time of day, since charts.js just hides the bar if it has no value. The function checks if
     //it is the time data, then will change 0 count to the data count based on index.
     if (sortedData[1].value.toString().includes(":00")) {
-      var labels = TIME_LIST;
-      var data = DEFAULT_ZERO;
+      labels = TIME_LIST;
+      data = DEFAULT_VALUES_TIME;
       sortedData.forEach(arg1 => {
         labels.forEach(arg2 => {
           if (arg1.value === arg2) {
@@ -157,16 +138,28 @@ class HomePage extends Component {
           }
         });
       });
+    } else if (sortedData[1].value.toString().includes("Checked")) {
+      //So this is the same as above but even more complicated because I can use the default key "isBrakesChecked"
+      //as the displayed lable so I have to sort through all the infraction types, match them up with the INFRACTION_TYPE
+      //array to find the index, then actually reset labels to a INFRACTION_LABLES to get the lables I actually want to
+      //display on the screen.
+      labels = INFRACTION_TYPE;
+      data = DEFAULT_VALUES_INFRACTION;
+      sortedData.forEach(arg1 => {
+        labels.forEach(arg2 => {
+          if (arg1.value === arg2) {
+            const index = labels.indexOf(arg2);
+            data[index] = arg1.count;
+          }
+        });
+      });
+      labels = INFRACTION_LABLES;
     } else {
       sortedData.forEach(element => {
         labels.push(element.value);
         data.push(element.count);
       });
     }
-    console.log(labels);
-
-    // Ajax calls here
-
     var Data = {
       labels: labels,
       datasets: [
@@ -174,30 +167,37 @@ class HomePage extends Component {
           label: "Ticked People",
           data: data,
           backgroundColor: [
-            "rgba(255, 99, 132, 0.6)",
-            "rgba(54, 162, 235, 0.6)",
-            "rgba(255, 206, 86, 0.6)",
-            "rgba(75, 192, 192, 0.6)",
-            "rgba(153, 102, 255, 0.6)",
-            "rgba(255, 159, 64, 0.6)",
-            "rgba(255, 99, 132, 0.6)"
+            "rgba(255, 99, 132, 0.5)",
+            "rgba(54, 162, 235, 0.5)",
+            "rgba(255, 206, 86, 0.5)",
+            "rgba(75, 192, 192, 0.5)",
+            "rgba(153, 102, 255, 0.5)",
+            "rgba(255, 159, 64, 0.5)",
+
+            "rgba(255, 99, 132, 0.5)",
+            "rgba(54, 162, 235, 0.5)",
+            "rgba(255, 206, 86, 0.5)",
+            "rgba(75, 192, 192, 0.5)",
+            "rgba(153, 102, 255, 0.5)",
+            "rgba(255, 159, 64, 0.5)",
+
+            "rgba(255, 99, 132, 0.5)",
+            "rgba(54, 162, 235, 0.5)",
+            "rgba(255, 206, 86, 0.5)",
+            "rgba(75, 192, 192, 0.5)",
+            "rgba(153, 102, 255, 0.5)",
+            "rgba(255, 159, 64, 0.5)",
+
+            "rgba(255, 99, 132, 0.5)",
+            "rgba(54, 162, 235, 0.5)",
+            "rgba(255, 206, 86, 0.5)",
+            "rgba(75, 192, 192, 0.5)",
+            "rgba(153, 102, 255, 0.5)",
+            "rgba(255, 159, 64, 0.5)"
           ]
         }
       ],
-      options: {
-        title: {
-          display: false
-        },
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: false
-              }
-            }
-          ]
-        }
-      }
+      options: {}
     };
     return Data;
   };
@@ -255,7 +255,6 @@ class HomePage extends Component {
                   hoursTicketedData={this.state.hoursTicketed}
                   isCarModifiedData={this.state.isCarModified}
                   policeVehicleData={this.state.policeVehicle}
-                  violationTypes={this.state.violationTypes}
                   violationTypes={this.state.violationTypes}
                 />
               </div>

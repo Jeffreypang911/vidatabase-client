@@ -63,10 +63,6 @@ class ChartDisplay extends Component {
                       text: "Officer who gives out the most VI tickets",
                       fontSize: 25
                     },
-                    // legend: {
-                    //   display: this.props.displayLegend,
-                    //   position: this.props.legendPosition
-                    // },
                     options: { maintainAspectRatio: false }
                   }}
                 />
