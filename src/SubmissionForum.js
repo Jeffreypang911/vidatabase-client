@@ -483,7 +483,6 @@ class SubmissionForum extends Component {
                   />
                   <span style={labelContentStyle}>
                     Description of Car Model, <br></br>Modifications, Ect.{" "}
-                    <br></br> (Optional)
                   </span>
                 </div>
                 <div style={{ flex: "6 6 0px" }}>
@@ -507,7 +506,7 @@ class SubmissionForum extends Component {
                     validationOption={{
                       name: "Description",
                       check: true,
-                      required: false,
+                      required: true,
                       type: "string"
                     }}
                   />

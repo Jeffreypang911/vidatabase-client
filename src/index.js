@@ -4,7 +4,7 @@ import "react-inputs-validation/lib/react-inputs-validation.min.css";
 import "./styles.css";
 import "react-day-picker/lib/style.css";
 import SubmissionForum from "./SubmissionForum";
-import MapDisplay from "./MapDisplay";
+import HomePage from "./HomePage";
 import firebase from "firebase";
 
 require("dotenv").config();
@@ -22,7 +22,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<MapDisplay />, rootElement);
+ReactDOM.render(<HomePage />, rootElement);
 
 // const rootElement = document.getElementById("root");
 // ReactDOM.render(<SubmissionForum />, rootElement);
