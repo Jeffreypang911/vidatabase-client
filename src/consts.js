@@ -1,4 +1,4 @@
-export const TIME_TWO = [
+export const TIME_LIST = [
   "7:00AM",
   "8:00AM",
   "9:00AM",
@@ -23,6 +23,33 @@ export const TIME_TWO = [
   "4:00AM",
   "5:00AM",
   "6:00AM"
+];
+
+export const DEFAULT_ZERO = [
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0",
+  "0"
 ];
 
 export const CAR_MAKE = [

@@ -7,6 +7,7 @@ import firebase from "firebase";
 import L from "leaflet";
 import MapDisplay from "./Components/MapDisplay";
 import ChartDisplay from "./Components/ChartDisplay";
+import { DEFAULT_ZERO, TIME_LIST } from "./consts";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -26,7 +27,7 @@ class HomePage extends Component {
       hoursTicketed: [],
       isCarModified: [],
       policeVehicle: [],
-      chartData: {}
+      violationTypes: []
     };
   }
 
@@ -53,7 +54,18 @@ class HomePage extends Component {
     var policeOfficers = [];
     var hoursTicketed = [];
     var isCarModified = [];
-
+    var violationTypes = [];
+    var violationCount = [
+      { value: "isBrakesChecked", count: 0 },
+      { value: "isCouplingDevicesChecked", count: 0 },
+      { value: "isExhaustChecked", count: 0 },
+      { value: "isFuelSystemChecked", count: 0 },
+      { value: "isLightsChecked", count: 0 },
+      { value: "isLoadSecurityChecked", count: 0 },
+      { value: "isLoadSecurityChecked", count: 0 },
+      { value: "isLoadSecurityChecked", count: 0 },
+      { value: "isLoadSecurityChecked", count: 0 }
+    ];
     //userObj.xxxxx is the actual key in the Firebase Database
     array.forEach(userObj => {
       policeVehicle.push(userObj.policeVehicle);
@@ -61,12 +73,33 @@ class HomePage extends Component {
       policeOfficers.push(userObj.policeOfficer);
       hoursTicketed.push(userObj.infractionTime);
       isCarModified.push(userObj.isCarModified);
+      // console.log(userObj.violations);
+
+      for (const property in userObj.violations) {
+        if (userObj.violations[property] === true) {
+          // violationCount.forEach(obj => {
+          //   if (obj.value === property) {
+          console.log("YOOOOdd", property);
+
+          violationTypes.push(property);
+          // violationCount[index]
+          // obj.count
+          //   }
+          // });
+          // console.log("LOLOL", property);
+        }
+        // console.log(`${property}: ${userObj.violations[property]}`);
+      }
+      console.log("violationTypes", violationTypes);
     });
 
     const policeVehicleList = this.getChartData(this.arraySort(policeVehicle));
     const vehicleBrandList = this.getChartData(this.arraySort(vehicleBrand));
     const policeOfficersList = this.getChartData(
       this.arraySort(policeOfficers)
+    );
+    const violationTypesList = this.getChartData(
+      this.arraySort(violationTypes)
     );
     const hoursTicketedList = this.getChartData(this.arraySort(hoursTicketed));
     const isCarModifiedList = this.getChartData(this.arraySort(isCarModified));
@@ -76,7 +109,8 @@ class HomePage extends Component {
       vehicleBrand: vehicleBrandList,
       policeOfficers: policeOfficersList,
       hoursTicketed: hoursTicketedList,
-      isCarModified: isCarModifiedList
+      isCarModified: isCarModifiedList,
+      violationTypes: violationTypesList
     });
   };
 
@@ -109,42 +143,26 @@ class HomePage extends Component {
 
     var labels = [];
     var data = [];
-
-    // if (time) {
-    //   labels = [
-    //     "7:00AM",
-    //     "8:00AM",
-    //     "9:00AM",
-    //     "10:00AM",
-    //     "11:00AM",
-    //     "12:00PM",
-    //     "1:00PM",
-    //     "2:00PM",
-    //     "3:00PM",
-    //     "4:00PM",
-    //     "5:00PM",
-    //     "6:00PM",
-    //     "7:00PM",
-    //     "8:00PM",
-    //     "9:00PM",
-    //     "10:00PM",
-    //     "11:00PM",
-    //     "12:00AM",
-    //     "1:00AM",
-    //     "2:00AM",
-    //     "3:00AM",
-    //     "4:00AM",
-    //     "5:00AM",
-    //     "6:00AM"
-    //   ];
-    //   sortedData.forEach(element => {
-    //     data.push(element.count);
-    //   });
-    // }
-    sortedData.forEach(element => {
-      labels.push(element.value);
-      data.push(element.count);
-    });
+    //This is confusing but it is so we can display a default value of 0 people for
+    //the time of day, since charts.js does not do this automatically. The function checks if
+    //it is the time data, then will change 0 count to the data count based on index.
+    if (sortedData[1].value.toString().includes(":00")) {
+      var labels = TIME_LIST;
+      var data = DEFAULT_ZERO;
+      sortedData.forEach(arg1 => {
+        labels.forEach(arg2 => {
+          if (arg1.value === arg2) {
+            const index = labels.indexOf(arg2);
+            data[index] = arg1.count;
+          }
+        });
+      });
+    } else {
+      sortedData.forEach(element => {
+        labels.push(element.value);
+        data.push(element.count);
+      });
+    }
     console.log(labels);
 
     // Ajax calls here
@@ -153,7 +171,7 @@ class HomePage extends Component {
       labels: labels,
       datasets: [
         {
-          label: "Units",
+          label: "Ticked People",
           data: data,
           backgroundColor: [
             "rgba(255, 99, 132, 0.6)",
@@ -209,7 +227,7 @@ class HomePage extends Component {
           border: "100px solid #e5e5e5"
         }}
       >
-        <h1>VI USER MAP</h1>
+        <h1>Locations of VI Infractions in Vancouver</h1>
         <div style={rowWrapperStyle}>
           <div style={rowContainerStyle}>
             <div style={rowStyle}>
@@ -237,6 +255,8 @@ class HomePage extends Component {
                   hoursTicketedData={this.state.hoursTicketed}
                   isCarModifiedData={this.state.isCarModified}
                   policeVehicleData={this.state.policeVehicle}
+                  violationTypes={this.state.violationTypes}
+                  violationTypes={this.state.violationTypes}
                 />
               </div>
             </div>
