@@ -21,13 +21,16 @@ class HomePage extends Component {
     super(props);
     this.state = {
       userData: [],
+      vehicleBrand: [],
+      policeOfficers: [],
+      hoursTicketed: [],
+      isCarModified: [],
+      policeVehicle: [],
       chartData: {}
     };
   }
 
-  componentWillMount = () => {
-    this.getChartData();
-  };
+  componentWillMount = () => {};
 
   componentDidMount = () => {
     let ref = firebase.database().ref("users/");
@@ -36,40 +39,149 @@ class HomePage extends Component {
       if (res.val() !== undefined) {
         const UserArry = Object.values(res.val());
         // If response not undefined then load it to 'state'
+        this.arrayCount(UserArry);
         this.setState({ userData: UserArry, loading: false });
       }
     });
   };
 
-  getChartData = () => {
-    // Ajax calls here
-    this.setState({
-      chartData: {
-        labels: [
-          "Boston",
-          "Worcester",
-          "Springfield",
-          "Lowell",
-          "Cambridge",
-          "New Bedford"
-        ],
-        datasets: [
-          {
-            label: "Population",
-            data: [617594, 181045, 153060, 106519, 105162, 95072],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.6)",
-              "rgba(54, 162, 235, 0.6)",
-              "rgba(255, 206, 86, 0.6)",
-              "rgba(75, 192, 192, 0.6)",
-              "rgba(153, 102, 255, 0.6)",
-              "rgba(255, 159, 64, 0.6)",
-              "rgba(255, 99, 132, 0.6)"
-            ]
-          }
-        ]
-      }
+  arrayCount = array => {
+    //This function pushes all instances of a value in the Data Object. Then the arraySort function
+    //counts how many of each value is and displays it as an object.
+    var policeVehicle = [];
+    var vehicleBrand = [];
+    var policeOfficers = [];
+    var hoursTicketed = [];
+    var isCarModified = [];
+
+    //userObj.xxxxx is the actual key in the Firebase Database
+    array.forEach(userObj => {
+      policeVehicle.push(userObj.policeVehicle);
+      vehicleBrand.push(userObj.carMake);
+      policeOfficers.push(userObj.policeOfficer);
+      hoursTicketed.push(userObj.infractionTime);
+      isCarModified.push(userObj.isCarModified);
     });
+
+    const policeVehicleList = this.getChartData(this.arraySort(policeVehicle));
+    const vehicleBrandList = this.getChartData(this.arraySort(vehicleBrand));
+    const policeOfficersList = this.getChartData(
+      this.arraySort(policeOfficers)
+    );
+    const hoursTicketedList = this.getChartData(this.arraySort(hoursTicketed));
+    const isCarModifiedList = this.getChartData(this.arraySort(isCarModified));
+
+    this.setState({
+      policeVehicle: policeVehicleList,
+      vehicleBrand: vehicleBrandList,
+      policeOfficers: policeOfficersList,
+      hoursTicketed: hoursTicketedList,
+      isCarModified: isCarModifiedList
+    });
+  };
+
+  arraySort = array => {
+    var dataArray = [];
+
+    array.sort();
+
+    var current = null;
+    var cnt = 0;
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] != current) {
+        if (cnt > 0) {
+          dataArray.push({ value: current, count: cnt });
+        }
+        current = array[i];
+        cnt = 1;
+      } else {
+        cnt++;
+      }
+    }
+    if (cnt > 0) {
+      dataArray.push({ value: current, count: cnt });
+    }
+    return dataArray;
+  };
+
+  getChartData = sortedData => {
+    //This function creates the necessary data format for charts.js.
+
+    var labels = [];
+    var data = [];
+
+    // if (time) {
+    //   labels = [
+    //     "7:00AM",
+    //     "8:00AM",
+    //     "9:00AM",
+    //     "10:00AM",
+    //     "11:00AM",
+    //     "12:00PM",
+    //     "1:00PM",
+    //     "2:00PM",
+    //     "3:00PM",
+    //     "4:00PM",
+    //     "5:00PM",
+    //     "6:00PM",
+    //     "7:00PM",
+    //     "8:00PM",
+    //     "9:00PM",
+    //     "10:00PM",
+    //     "11:00PM",
+    //     "12:00AM",
+    //     "1:00AM",
+    //     "2:00AM",
+    //     "3:00AM",
+    //     "4:00AM",
+    //     "5:00AM",
+    //     "6:00AM"
+    //   ];
+    //   sortedData.forEach(element => {
+    //     data.push(element.count);
+    //   });
+    // }
+    sortedData.forEach(element => {
+      labels.push(element.value);
+      data.push(element.count);
+    });
+    console.log(labels);
+
+    // Ajax calls here
+
+    var Data = {
+      labels: labels,
+      datasets: [
+        {
+          label: "Units",
+          data: data,
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.6)",
+            "rgba(54, 162, 235, 0.6)",
+            "rgba(255, 206, 86, 0.6)",
+            "rgba(75, 192, 192, 0.6)",
+            "rgba(153, 102, 255, 0.6)",
+            "rgba(255, 159, 64, 0.6)",
+            "rgba(255, 99, 132, 0.6)"
+          ]
+        }
+      ],
+      options: {
+        title: {
+          display: false
+        },
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: false
+              }
+            }
+          ]
+        }
+      }
+    };
+    return Data;
   };
 
   render() {
@@ -119,7 +231,13 @@ class HomePage extends Component {
                   rel="stylesheet"
                   href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"
                 />
-                <ChartDisplay chartData={this.state.chartData} />
+                <ChartDisplay
+                  vehicleBrandData={this.state.vehicleBrand}
+                  policeOfficersData={this.state.policeOfficers}
+                  hoursTicketedData={this.state.hoursTicketed}
+                  isCarModifiedData={this.state.isCarModified}
+                  policeVehicleData={this.state.policeVehicle}
+                />
               </div>
             </div>
           </div>

@@ -13,34 +13,43 @@ class ChartDisplay extends Component {
     displayTitle: true,
     displayLegend: true,
     legendPosition: "right",
-    location: "City"
+    location: "City",
+    vehicleBrandData: null,
+    policeOfficersData: null,
+    hoursTicketedData: null,
+    isCarModifiedData: null,
+    policeVehicleData: null
   };
 
   render() {
-    console.log(this.state.chartData);
     return (
       <div className="chart">
         <Bar
-          data={this.props.chartData}
+          width={"1000"}
+          height={"400"}
+          data={this.props.policeOfficersData}
           options={{
             title: {
               display: this.props.displayTitle,
-              text: "Time of day when VIs are given",
+              text: "Officer who gives out the most VI tickets",
               fontSize: 25
             },
             legend: {
               display: this.props.displayLegend,
               position: this.props.legendPosition
-            }
+            },
+            options: { maintainAspectRatio: false }
           }}
         />
 
         <Line
-          data={this.props.chartData}
+          width={"1000"}
+          height={"400"}
+          data={this.props.hoursTicketedData}
           options={{
             title: {
               display: this.props.displayTitle,
-              text: "Officer who gives out the most VI",
+              text: "Time of day to most likely get a VI",
               fontSize: 25
             },
             legend: {
@@ -51,11 +60,11 @@ class ChartDisplay extends Component {
         />
 
         <Pie
-          data={this.props.chartData}
+          data={this.props.vehicleBrandData}
           options={{
             title: {
               display: this.props.displayTitle,
-              text: "VI given to Modified Cars VS Stock Cars",
+              text: "Car Brands that are most likely to get VI",
               fontSize: 25
             },
             legend: {
