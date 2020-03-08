@@ -255,10 +255,6 @@ class HomePage extends Component {
           <div style={rowContainerStyle}>
             <div style={rowStyle}>
               <div style={{ flex: "6 6 0px" }}>
-                <link
-                  rel="stylesheet"
-                  href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"
-                />
                 <ChartDisplay
                   vehicleBrandData={this.state.vehicleBrand}
                   policeOfficersData={this.state.policeOfficers}
