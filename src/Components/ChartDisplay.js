@@ -112,6 +112,8 @@ class ChartDisplay extends Component {
             >
               <div>
                 <Pie
+                  width={"1000"}
+                  height={"300"}
                   data={this.props.vehicleBrandData}
                   options={{
                     title: {

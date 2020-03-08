@@ -251,15 +251,51 @@ class SubmissionForum extends Component {
       verticalAlign: "middle"
     };
 
+    const titleStyle = {
+      // alignItems: "center",
+      // justifyContent: "space-between",
+      // padding: "2%",
+      textDecoration: "none",
+      fontSize: "25px",
+      fontFamily: "Arial, Helvetica, sans-serif",
+      fontWeight: "bold",
+      color: "#5c5c5c"
+    };
+
     return (
       <div
         style={{
           minHeight: "1000px",
           padding: "10px",
-          border: "200px solid #e5e5e5"
+          border: "200px solid #e5e5e5",
+          fontFamily: "Arial, Helvetica, sans-serif"
         }}
       >
-        <h1>VI NOTICE SUBMISSION</h1>
+        {" "}
+        <div style={{ textAlign: "center" }}>
+          <h1 style={titleStyle}>VI NOTICE SUBMISSION</h1>
+        </div>
+        <div
+          style={{
+            paddingLeft: "20%",
+            paddingRight: "20%",
+            textAlign: "center"
+          }}
+        >
+          <div
+            style={{
+              textAlign: "center",
+              fontWeight: "bold",
+              color: "grey",
+              marginBottom: "50px"
+            }}
+          >
+            Submit your VI information to be a part of the dataset. Use your
+            ticket to fill out as much as you can. Your information will be
+            analysed and added to the database to create statistics on the home
+            page that everyone can use.
+          </div>
+        </div>
         <form onSubmit={this.validateForm}>
           <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
@@ -921,7 +957,7 @@ class SubmissionForum extends Component {
                     {this.state.currentPos && (
                       <MyMarker position={this.state.currentPos}>
                         <Popup position={this.state.currentPos}>
-                          <b>VI Location:</b>
+                          <b>My VI Location:</b>
                           <br></br>
                           Latatude:{" "}
                           {JSON.stringify(this.state.currentPos.lat, null, 2)},
@@ -946,9 +982,7 @@ class SubmissionForum extends Component {
                     className="icon icon-insert-drive-file"
                     style={{ ...labelContentStyle, fontSize: "20px" }}
                   />
-                  <span style={labelContentStyle}>
-                    Description of Incident <br></br> (Optional)
-                  </span>
+                  <span style={labelContentStyle}>Description of Incident</span>
                 </div>
                 <div style={{ flex: "6 6 0px" }}>
                   <Textarea
@@ -971,7 +1005,7 @@ class SubmissionForum extends Component {
                     validationOption={{
                       name: "Description",
                       check: true,
-                      required: false,
+                      required: true,
                       type: "string"
                     }}
                   />

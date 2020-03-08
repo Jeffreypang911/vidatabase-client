@@ -219,6 +219,16 @@ class HomePage extends Component {
       verticalAlign: "middle",
       borderBottom: "1px solid #e5e5e5"
     };
+    const titleStyle = {
+      margin: "1px",
+      paddingTop: "40px",
+      fontSize: "25px",
+      fontFamily: "Arial, Helvetica, sans-serif",
+      fontWeight: "bold",
+      color: "#5c5c5c",
+      textAlign: "center"
+    };
+
     return (
       <div
         style={{
@@ -227,7 +237,7 @@ class HomePage extends Component {
           border: "100px solid #e5e5e5"
         }}
       >
-        <h1>Locations of VI Infractions in Vancouver</h1>
+        <h1 style={titleStyle}>Locations of VI Infractions in Vancouver</h1>
         <div style={rowWrapperStyle}>
           <div style={rowContainerStyle}>
             <div style={rowStyle}>
