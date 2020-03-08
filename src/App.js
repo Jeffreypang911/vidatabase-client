@@ -4,6 +4,7 @@ import "./styles.css";
 import "react-day-picker/lib/style.css";
 import SubmissionForum from "./SubmissionForum";
 import HomePage from "./HomePage";
+import AboutPage from "./AboutPage";
 
 const titleStyle = {
   // alignItems: "center",
@@ -53,7 +54,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/submission" component={SubmissionForum} />
-            {/* <Route path="/about" component={About} /> */}
+            <Route path="/about" component={AboutPage} />
           </Switch>
         </div>
       </Router>
