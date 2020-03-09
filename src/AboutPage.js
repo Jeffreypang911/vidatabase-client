@@ -85,10 +85,11 @@ class AboutPage extends Component {
             2019.
             <br /> <br />
             The information and charts derived from the submitted dataset can
-            hopefully help the community learn what areas the police are
-            targeting, as well as what brands of cars most often ticketed and
-            even time of day that tickets are being issued. These statistics can
-            only be as accurate as the data that is submitted.
+            hopefully help the community learn the areas the police are
+            targeting, as well as the brands of vehicle most ticketed, and even
+            time of day that you will most likely be ticketed. These statistics
+            can only be as accurate as the data that is submitted - so this is a
+            team effort.
             <br /> <br />
             Below are some links that help highlight the issues:
           </div>
@@ -153,13 +154,13 @@ class AboutPage extends Component {
           </div>
 
           <div style={textDiv}>
-            I spent a lot of time building this. The database/domain costs are
-            fronted by myself. I am wishing to only help the community I care
-            about - we share a common passion for cars and I hope someone out
-            there will find this useful. As long as people use it I will
-            continue to put hours into it to improve the UX/UI and fix bugs, as
-            well as clean up the dataset when obviously false information is
-            submitted. <br />
+            I spent a lot of time building this. Both the database and domain
+            costs are fronted by myself. I do this to only attempt to help the
+            community I care about - we share a common passion for cars and I
+            hope someone out there will find this useful. As long as people use
+            it I will continue to put hours into it to improve the UX/UI and fix
+            bugs, as well as clean up the dataset when obviously false
+            information is submitted. <br />
             <br />
             Thank you for visiting! <br />
             <br />

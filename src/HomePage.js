@@ -233,8 +233,8 @@ class HomePage extends Component {
       <div
         style={{
           minHeight: "1000px",
-          padding: "10px",
-          border: "100px solid #e5e5e5"
+          padding: "10px"
+          // border: "100px solid #e5e5e5"
           // backgroundColor: "red"
         }}
       >
