@@ -244,8 +244,9 @@ class HomePage extends Component {
               <div style={{ flex: "6 6 0px" }}>
                 <link
                   rel="stylesheet"
-                  href="https://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"
+                  href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
                 />
+
                 <MapDisplay userData={this.state.userData} />
               </div>
             </div>

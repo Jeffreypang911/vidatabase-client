@@ -47,8 +47,10 @@ class AboutPage extends Component {
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
+        CTV News coverage of stock Fiat getting a VI:
+        https://bc.ctvnews.ca/sports-car-enthusiasts-believe-they-re-being-unfairly-targeted-by-vancouver-police-1.4331471?fbclid=IwAR3UzcEcTgh28omI2RkswO1XP-rHo2I9VWLtfconWELtnoIhjmh7-3GHx-M
         <br /> <br />
-        Beautifully Written Post by PCA Canada West:
+        Facebook Post by PCA Canada West:
         <img width="560" src="http://i.imgur.com/63I5bsX.jpg"></img>
         <br /> <br />
         Link to BC Motor Vehicle Act:
