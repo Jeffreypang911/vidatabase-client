@@ -6,7 +6,7 @@ import SubmissionForum from "./SubmissionForum";
 import HomePage from "./HomePage";
 import AboutPage from "./AboutPage";
 
-const titleStyle = {
+const navTitleStyle = {
   // alignItems: "center",
   // justifyContent: "space-between",
   // padding: "2%",
@@ -27,16 +27,16 @@ class App extends Component {
       <Router>
         <div>
           <h2></h2>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <nav>
             <div className="navBar">
               <div>
-                <Link style={titleStyle} to={"/"} className="nav-link">
+                <Link style={navTitleStyle} to={"/"} className="nav-link">
                   HOME
                 </Link>
               </div>
               <div>
                 <Link
-                  style={titleStyle}
+                  style={navTitleStyle}
                   to={"/submission"}
                   className="nav-link"
                 >
@@ -44,7 +44,7 @@ class App extends Component {
                 </Link>
               </div>
               <div>
-                <Link style={titleStyle} to={"/about"} className="nav-link">
+                <Link style={navTitleStyle} to={"/about"} className="nav-link">
                   ABOUT
                 </Link>
               </div>

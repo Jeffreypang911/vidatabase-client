@@ -235,6 +235,7 @@ class HomePage extends Component {
           minHeight: "1000px",
           padding: "10px",
           border: "100px solid #e5e5e5"
+          // backgroundColor: "red"
         }}
       >
         <h1 style={titleStyle}>Locations of VI Infractions in Vancouver</h1>
