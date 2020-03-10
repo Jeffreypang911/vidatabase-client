@@ -401,6 +401,7 @@ class SubmissionForum extends Component {
                   <div style={{ flex: "6 6 0px" }}>
                     <div>
                       <DayPickerInput
+                        inputProps={{ readOnly: true }}
                         onDayChange={this.handleDayChange}
                         dayPickerProps={{
                           month: new Date(2020, 2),
