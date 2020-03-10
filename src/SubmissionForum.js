@@ -280,18 +280,7 @@ class SubmissionForum extends Component {
     // `;
 
     return (
-      <div
-        className="formborder"
-        // style={{
-        //   minHeight: "1000px",
-        //   paddingLeft: "15%",
-        //   paddingRight: "15%",
-        //   paddingTop: "5%",
-        //   paddingBottom: "10%",
-        //   backgroundColor: "#e5e5e5",
-        //   fontFamily: "Arial, Helvetica, sans-serif"
-        // }}
-      >
+      <div className="formborder">
         <div style={forumBackground}>
           <div style={{ textAlign: "center" }}>
             <h1 style={titleStyle}>VI NOTICE SUBMISSION</h1>

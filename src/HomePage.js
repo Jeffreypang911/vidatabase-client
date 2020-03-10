@@ -203,25 +203,27 @@ class HomePage extends Component {
   };
 
   render() {
-    const rowStyle = {
-      display: "flex",
-      alignItems: "flex-start",
-      justifyContent: "space-between",
-      padding: "2%",
-      fontSize: "14px"
-    };
-    const rowWrapperStyle = {
-      display: "table",
-      width: "100%"
-    };
-    const rowContainerStyle = {
-      display: "table-cell",
-      verticalAlign: "middle",
-      borderBottom: "1px solid #e5e5e5"
-    };
+    // const rowStyle = {
+    //   display: "flex",
+    //   alignItems: "flex-start",
+    //   justifyContent: "space-between",
+    //   padding: "2%",
+    //   fontSize: "14px"
+    // };
+    // const rowWrapperStyle = {
+    //   display: "table",
+    //   width: "100%"
+    // };
+    // const rowContainerStyle = {
+    //   display: "table-cell",
+    //   verticalAlign: "middle",
+    //   borderBottom: "1px solid #e5e5e5"
+    // };
+
     const titleStyle = {
       margin: "1px",
       paddingTop: "40px",
+      paddingBottom: "10px",
       fontSize: "25px",
       fontFamily: "Arial, Helvetica, sans-serif",
       fontWeight: "bold",
@@ -229,44 +231,31 @@ class HomePage extends Component {
       textAlign: "center"
     };
 
-    return (
-      <div
-        style={{
-          minHeight: "1000px",
-          padding: "10px"
-          // border: "100px solid #e5e5e5"
-          // backgroundColor: "red"
-        }}
-      >
-        <h1 style={titleStyle}>Locations of VI Infractions in Vancouver</h1>
-        <div style={rowWrapperStyle}>
-          <div style={rowContainerStyle}>
-            <div style={rowStyle}>
-              <div style={{ flex: "6 6 0px" }}>
-                <link
-                  rel="stylesheet"
-                  href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-                />
+    const forumBackground = {
+      backgroundColor: "white",
+      padding: "3%"
+    };
 
-                <MapDisplay userData={this.state.userData} />
-              </div>
-            </div>
+    return (
+      <div className="chartdisplayborder">
+        <div style={forumBackground}>
+          <h1 style={titleStyle}>Locations of VI Infractions in Vancouver</h1>
+          <div style={{}}>
+            <link
+              rel="stylesheet"
+              href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+            />
+            <MapDisplay userData={this.state.userData} />
           </div>
-        </div>
-        <div style={rowWrapperStyle}>
-          <div style={rowContainerStyle}>
-            <div style={rowStyle}>
-              <div style={{ flex: "6 6 0px" }}>
-                <ChartDisplay
-                  vehicleBrandData={this.state.vehicleBrand}
-                  policeOfficersData={this.state.policeOfficers}
-                  hoursTicketedData={this.state.hoursTicketed}
-                  isCarModifiedData={this.state.isCarModified}
-                  policeVehicleData={this.state.policeVehicle}
-                  violationTypes={this.state.violationTypes}
-                />
-              </div>
-            </div>
+          <div style={{}}>
+            <ChartDisplay
+              vehicleBrandData={this.state.vehicleBrand}
+              policeOfficersData={this.state.policeOfficers}
+              hoursTicketedData={this.state.hoursTicketed}
+              isCarModifiedData={this.state.isCarModified}
+              policeVehicleData={this.state.policeVehicle}
+              violationTypes={this.state.violationTypes}
+            />
           </div>
         </div>
       </div>

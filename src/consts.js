@@ -97,7 +97,6 @@ export const DEFAULT_VALUES_TIME = [
 export const CAR_MAKE = [
   { name: "Acura", id: "Acura" },
   { name: "Alfa Romeo", id: "Alfa Romeo" },
-  { name: "American Motors", id: "American Motors" },
   { name: "Aston Martin", id: "Aston Martin" },
   { name: "Audi", id: "Audi" },
   { name: "Austin-Healey", id: "Austin-Healey" },
@@ -110,7 +109,6 @@ export const CAR_MAKE = [
   { name: "Chrysler ", id: "Chrysler " },
   { name: "Datsun ", id: "Datsun " },
   { name: "Dodge or Ram ", id: "Dodge or Ram " },
-  { name: "Factory Five Racing", id: "Factory Five Racing" },
   { name: "Ferrari", id: "Ferrari" },
   { name: "Fiat ", id: "Fiat " },
   { name: "Fisker", id: "Fisker" },

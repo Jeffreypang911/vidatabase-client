@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Bar, Line, Pie, HorizontalBar } from "react-chartjs-2";
+import "../styles.css";
 
 const rowWrapperStyle = {
   display: "table",
@@ -38,127 +39,108 @@ class ChartDisplay extends Component {
 
   render() {
     return (
-      <div className="chart">
-        <div style={rowWrapperStyle}>
-          <div style={rowContainerStyle}>
-            <div style={rowStyle}>
-              <div>
-                <Bar
-                  width={"1000"}
-                  height={"400"}
-                  data={this.props.policeOfficersData}
-                  options={{
-                    scales: {
-                      yAxes: [
-                        {
-                          ticks: {
-                            min: 0,
-                            stepSize: 1
-                          }
+      <div>
+        <div className="chartRowWrapper">
+          <div className="chart">
+            <div className="chartboarder">
+              <Line
+                width={"100%"}
+                height={"70%"}
+                data={this.props.hoursTicketedData}
+                options={{
+                  scales: {
+                    yAxes: [
+                      {
+                        ticks: {
+                          min: 0,
+                          stepSize: 1
                         }
-                      ]
-                    },
-                    title: {
-                      display: this.props.displayTitle,
-                      text: "Officer who gives out the most VI tickets",
-                      fontSize: 25
-                    },
-                    options: { maintainAspectRatio: false }
-                  }}
-                />
-              </div>
+                      }
+                    ]
+                  },
+                  title: {
+                    display: this.props.displayTitle,
+                    text: "Time of day to most likely get a VI",
+                    fontSize: 16
+                  }
+                }}
+              />{" "}
+            </div>
+          </div>
+          <div className="chart">
+            <div className="chartboarder">
+              <HorizontalBar
+                width={"100%"}
+                height={"70%"}
+                data={this.props.violationTypes}
+                options={{
+                  scales: {
+                    xAxes: [
+                      {
+                        ticks: {
+                          min: 0,
+                          stepSize: 1
+                        }
+                      }
+                    ]
+                  },
+                  title: {
+                    display: this.props.displayTitle,
+                    text: "Most Common Reasons for VI",
+                    fontSize: 16
+                  },
+                  options: { maintainAspectRatio: false }
+                }}
+              />
             </div>
           </div>
         </div>
-        <div style={rowWrapperStyle}>
-          <div style={rowContainerStyle}>
-            <div style={rowStyle}>
-              <div>
-                <Line
-                  width={"1050"}
-                  height={"400"}
-                  data={this.props.hoursTicketedData}
-                  options={{
-                    scales: {
-                      yAxes: [
-                        {
-                          ticks: {
-                            min: 0,
-                            stepSize: 1
-                          }
-                        }
-                      ]
-                    },
-                    title: {
-                      display: this.props.displayTitle,
-                      text: "Time of day to most likely get a VI",
-                      fontSize: 25
-                    }
-                  }}
-                />{" "}
-              </div>
+        <div className="chartRowWrapper">
+          <div className="chart">
+            <div className="chartboarder">
+              <Pie
+                width={"100%"}
+                height={"70%"}
+                data={this.props.vehicleBrandData}
+                options={{
+                  title: {
+                    display: this.props.displayTitle,
+                    text: "Car Brands that are most likely to get VI",
+                    fontSize: 16
+                  },
+                  legend: {
+                    display: this.props.displayLegend,
+                    position: this.props.legendPosition
+                  }
+                }}
+              />{" "}
             </div>
           </div>
-        </div>
-        <div style={rowWrapperStyle}>
-          <div style={rowContainerStyle}>
-            <div
-              style={{
-                alignItems: "flex-start",
-                justifyContent: "space-between",
-                padding: "2%",
-                fontSize: "14px"
-              }}
-            >
-              <div>
-                <Pie
-                  width={"1000"}
-                  height={"300"}
-                  data={this.props.vehicleBrandData}
-                  options={{
-                    title: {
-                      display: this.props.displayTitle,
-                      text: "Car Brands that are most likely to get VI",
-                      fontSize: 25
-                    },
-                    legend: {
-                      display: this.props.displayLegend,
-                      position: this.props.legendPosition
-                    }
-                  }}
-                />{" "}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div style={rowWrapperStyle}>
-          <div style={rowContainerStyle}>
-            <div style={rowStyle}>
-              <div>
-                <HorizontalBar
-                  width={"1000"}
-                  height={"400"}
-                  data={this.props.violationTypes}
-                  options={{
-                    scales: {
-                      xAxes: [
-                        {
-                          ticks: {
-                            min: 0,
-                            stepSize: 1
-                          }
+          <div className="chart">
+            <div className="chartboarder">
+              <Bar
+                width={"100%"}
+                height={"70%"}
+                data={this.props.policeOfficersData}
+                options={{
+                  scales: {
+                    yAxes: [
+                      {
+                        ticks: {
+                          min: 0,
+                          stepSize: 1
                         }
-                      ]
-                    },
-                    title: {
-                      display: this.props.displayTitle,
-                      text: "Most Common Reasons for VI",
-                      fontSize: 25
-                    },
-                    options: { maintainAspectRatio: false }
-                  }}
-                />
-              </div>
+                      }
+                    ]
+                  },
+                  title: {
+                    display: this.props.displayTitle,
+                    text: "Officer who gives out the most VI tickets",
+                    fontSize: 16
+                  },
+                  options: { maintainAspectRatio: false }
+                }}
+              />
             </div>
           </div>
         </div>
