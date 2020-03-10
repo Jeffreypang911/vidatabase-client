@@ -962,8 +962,8 @@ class SubmissionForum extends Component {
                     />
 
                     <Map
-                      center={[49.25, -123.1]}
-                      zoom={12}
+                      center={[49.22733, -123.0573]}
+                      zoom={11}
                       onClick={this.handleClick}
                     >
                       <TileLayer

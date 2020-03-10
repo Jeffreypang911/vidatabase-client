@@ -21,7 +21,7 @@ class MapDisplay extends Component {
   render() {
     return (
       <div>
-        <Map center={[49.25, -123.1]} zoom={12}>
+        <Map center={[49.22733, -123.0573]} zoom={11}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
