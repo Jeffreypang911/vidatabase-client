@@ -253,7 +253,7 @@ class SubmissionForum extends Component {
     };
     const titleStyle = {
       textDecoration: "none",
-      fontSize: "25px",
+      fontSize: "22px",
       fontFamily: "Arial, Helvetica, sans-serif",
       fontWeight: "bold",
       color: "#5c5c5c"
@@ -261,29 +261,20 @@ class SubmissionForum extends Component {
     const forumDescription = {
       textAlign: "center",
       fontWeight: "",
-      color: "#808080",
-      marginBottom: "50px"
+      color: "#adadad",
+      marginBottom: "50px",
+      fontSize: "13px"
     };
     const forumBackground = {
       backgroundColor: "white",
       padding: "3%"
     };
 
-    // const ForumBorder = styled.div`
-    //   min-height: 1000px;
-    //   padding-left: 15%;
-    //   padding-right: 15%;
-    //   padding-top: 5%;
-    //   padding-bottom: 10%;
-    //   background-color: #e5e5e5;
-    //   font-family: Arial, Helvetica, sans-serif;
-    // `;
-
     return (
       <div className="formborder">
         <div style={forumBackground}>
           <div style={{ textAlign: "center" }}>
-            <h1 style={titleStyle}>VI NOTICE SUBMISSION</h1>
+            <h1 style={titleStyle}>Vehicle Inspection Notice Submission.</h1>
           </div>
           <div
             style={{

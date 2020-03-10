@@ -15,7 +15,7 @@ const mainContainer = {
 
 const boarderContainer = {
   padding: "4%",
-  backgroundColor: "#ededed"
+  backgroundColor: "#e5e5e5"
 };
 const textDiv = {
   // backgroundColor: "green",
@@ -52,7 +52,7 @@ const linkContainer = {
 const ImageContainer = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #ededed;
+  background-color: #e5e5e5;
   @media (max-width: 515px) {
     flex-direction: column;
   }
@@ -166,6 +166,34 @@ class AboutPage extends Component {
             <br />
             Jeffrey P
           </div>
+          {/* <form
+            action="https://www.paypal.com/cgi-bin/webscr"
+            method="post"
+            target="_top"
+          >
+            <input type="hidden" name="cmd" value="_donations" />
+            <input
+              type="hidden"
+              name="business"
+              value="jeffreypang911@gmail.com"
+            />
+            <input type="hidden" name="currency_code" value="CAD" />
+            <input
+              type="image"
+              src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif"
+              border="0"
+              name="submit"
+              title="PayPal - The safer, easier way to pay online!"
+              alt="Donate with PayPal button"
+            />
+            <img
+              alt=""
+              border="0"
+              src="https://www.paypal.com/en_CA/i/scr/pixel.gif"
+              width="1"
+              height="1"
+            />
+          </form> */}
         </div>
       </div>
     );

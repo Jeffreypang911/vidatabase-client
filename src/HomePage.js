@@ -167,13 +167,14 @@ class HomePage extends Component {
           label: "Ticked People",
           data: data,
           backgroundColor: [
+            //Default Color Swatch
             // "rgba(255, 99, 132, 0.5)",
             // "rgba(54, 162, 235, 0.5)",
             // "rgba(255, 206, 86, 0.5)",
             // "rgba(75, 192, 192, 0.5)",
             // "rgba(153, 102, 255, 0.5)",
             // "rgba(255, 159, 64, 0.5)",
-
+            //My Color Swatch
             // "rgba(226, 150, 146, 0.8)",
             // "rgba(238, 200, 169, 0.8)",
             // "rgba(245, 239, 208, 0.8)",
@@ -218,28 +219,11 @@ class HomePage extends Component {
   };
 
   render() {
-    // const rowStyle = {
-    //   display: "flex",
-    //   alignItems: "flex-start",
-    //   justifyContent: "space-between",
-    //   padding: "2%",
-    //   fontSize: "14px"
-    // };
-    // const rowWrapperStyle = {
-    //   display: "table",
-    //   width: "100%"
-    // };
-    // const rowContainerStyle = {
-    //   display: "table-cell",
-    //   verticalAlign: "middle",
-    //   borderBottom: "1px solid #e5e5e5"
-    // };
-
     const titleStyle = {
       margin: "1px",
-      paddingTop: "40px",
-      paddingBottom: "10px",
-      fontSize: "25px",
+      paddingTop: "2%",
+      paddingBottom: "1%",
+      fontSize: "22px",
       fontFamily: "Arial, Helvetica, sans-serif",
       fontWeight: "bold",
       color: "#5c5c5c",
@@ -254,7 +238,24 @@ class HomePage extends Component {
     return (
       <div className="chartdisplayborder">
         <div style={forumBackground}>
-          <h1 style={titleStyle}>Locations of VI Infractions in Vancouver</h1>
+          <h1 style={titleStyle}>
+            Vehicle Inspection Notices Given in Vancouver, BC.
+          </h1>
+          <div
+            style={{
+              color: "#adadad",
+              textAlign: "center",
+              paddingBottom: "3%",
+              paddingLeft: "10%",
+              paddingRight: "10%",
+              fontSize: "13px"
+            }}
+          >
+            Below is information derived from user submitted data regarding
+            vehicle inspection notices issued by the VPD. If you have been
+            issued a vehicle inspection notice and would like to contribute to
+            the data set, please do so in the "SUBMISSION" page.
+          </div>
           <div style={{}}>
             <link
               rel="stylesheet"
