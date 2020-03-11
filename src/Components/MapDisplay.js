@@ -44,12 +44,18 @@ class MapDisplay extends Component {
                     <b>Incident Description: </b>
                     {user.incidentDescription}
                     <br />
-                    <b>Instagram: </b>
-                    <a
-                      href={"https://www.instagram.com/" + user.instagramHandle}
-                    >
-                      @{user.instagramHandle}
-                    </a>
+                    {user.instagramHandle && (
+                      <div>
+                        <b>Instagram: </b>
+                        <a
+                          href={
+                            "https://www.instagram.com/" + user.instagramHandle
+                          }
+                        >
+                          @{user.instagramHandle}
+                        </a>
+                      </div>
+                    )}
                   </span>
                 </Popup>
               </Marker>
