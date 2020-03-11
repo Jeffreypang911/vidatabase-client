@@ -13,8 +13,8 @@ Validations, and Firebase.
 
 ## Screen Shots
 
-![Charts](/src/assets/Charts.jpg' "Charts")
-![Map](/src/assets/Map.jpg' "Map")
+![Charts](./src/assets/Charts.jpg' "Charts")
+![Map](./src/assets/Map.jpg' "Map")
 
 ## ENV Variables
 
