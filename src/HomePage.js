@@ -173,6 +173,7 @@ class HomePage extends Component {
             // "rgba(75, 192, 192, 0.5)",
             // "rgba(153, 102, 255, 0.5)",
             // "rgba(255, 159, 64, 0.5)",
+
             //My Color Swatch
             // "rgba(226, 150, 146, 0.8)",
             // "rgba(238, 200, 169, 0.8)",

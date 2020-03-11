@@ -13,21 +13,13 @@ const mainContainer = {
   padding: "4%"
 };
 
-const boarderContainer = {
-  padding: "4%",
-  backgroundColor: "#e5e5e5"
-};
 const textDiv = {
-  // backgroundColor: "green",
-  // paddingTop: "2%",
   color: "#878787",
   paddingBottom: "2%"
 };
 const imageCard = {
   textAlign: "center",
-  // margin: "2%",
   width: "100%"
-  // backgroundColor: "pink"
 };
 const imageBoarer = {
   padding: "5%"
@@ -41,15 +33,7 @@ const linkContainer = {
   paddingTop: "2%",
   paddingBottom: "2%",
   color: "#878787"
-
-  // backgroundColor: "#ededed"
 };
-
-// const imageContainer = {
-//   display: "flex",
-//   flexDirection: "row",
-//   backgroundColor: "#ededed"
-// };
 
 const ImageContainer = styled.div`
   display: flex;
@@ -63,7 +47,6 @@ const ImageContainer = styled.div`
 const description = {
   fontWeight: "bold",
   marginBottom: "5%"
-  // backgroundColor: "grey"
 };
 
 class AboutPage extends Component {
@@ -74,7 +57,7 @@ class AboutPage extends Component {
 
   render() {
     return (
-      <div style={boarderContainer}>
+      <div className="formborder">
         <div style={mainContainer}>
           <div style={textDiv}>
             My goal of this project is to build a non-biased dataset that can
