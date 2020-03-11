@@ -260,6 +260,8 @@ class SubmissionForum extends Component {
       } else {
         alert("PASSWORD INCORRECT");
       }
+    } else {
+      alert("Please enter all above input fields to submit.");
     }
   }
 
