@@ -2,21 +2,6 @@ import React, { Component } from "react";
 import { Bar, Line, Pie, HorizontalBar } from "react-chartjs-2";
 import "../styles.css";
 
-const rowWrapperStyle = {
-  display: "table",
-  width: "100%"
-};
-const rowContainerStyle = {
-  display: "table-cell",
-  verticalAlign: "middle",
-  borderBottom: "1px solid #e5e5e5"
-};
-const rowStyle = {
-  alignItems: "center",
-  justifyContent: "space-between",
-  padding: "2%",
-  fontSize: "14px"
-};
 class ChartDisplay extends Component {
   constructor(props) {
     super(props);

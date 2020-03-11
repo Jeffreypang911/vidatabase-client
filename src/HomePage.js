@@ -243,7 +243,7 @@ class HomePage extends Component {
           </h1>
           <div
             style={{
-              color: "#adadad",
+              color: "#878787",
               textAlign: "center",
               paddingBottom: "3%",
               paddingLeft: "10%",

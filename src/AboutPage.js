@@ -20,6 +20,7 @@ const boarderContainer = {
 const textDiv = {
   // backgroundColor: "green",
   // paddingTop: "2%",
+  color: "#878787",
   paddingBottom: "2%"
 };
 const imageCard = {
@@ -38,7 +39,8 @@ const image = {
 
 const linkContainer = {
   paddingTop: "2%",
-  paddingBottom: "2%"
+  paddingBottom: "2%",
+  color: "#878787"
 
   // backgroundColor: "#ededed"
 };

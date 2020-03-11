@@ -5,7 +5,6 @@ import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import firebase from "firebase";
-import styled from "styled-components";
 import {
   Textbox,
   Textarea,
@@ -24,7 +23,7 @@ import {
   YEAR,
   TIME
 } from "./consts.js";
-
+const SUBMISSION_PASSWORD = process.env.REACT_APP_SUBMISSION_PASSWORD;
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -86,7 +85,8 @@ class SubmissionForum extends Component {
       hasPoliceVehicleError: true,
       hasisCarModifiedError: true,
       hasMeasuringEquipmentError: true,
-      validate: false
+      validate: false,
+      password: ""
     };
     this.validateForm = this.validateForm.bind(this);
     this.handleDayChange = this.handleDayChange.bind(this);
@@ -119,6 +119,7 @@ class SubmissionForum extends Component {
       hasPoliceOfficerError,
       hasPoliceVehicleError,
       hasisCarModifiedError,
+      hasPasswordError,
       firstName,
       lastName,
       ticketNumber,
@@ -156,7 +157,8 @@ class SubmissionForum extends Component {
       !hasPoliceVehicleError &&
       !hasInfractionTypeError &&
       !hasinfractionTimeError &&
-      !hasisCarModifiedError
+      !hasisCarModifiedError &&
+      !hasPasswordError
     ) {
       const violations = {
         isBrakesChecked: isBrakesChecked,
@@ -189,15 +191,67 @@ class SubmissionForum extends Component {
         violations: violations,
         currentPos: currentPos,
         incidentDescription: incidentDescription,
-        instagramHandle: instagramText
+        instagramHandle: instagramText,
+        displayOnMap: true,
+        includeInData: true
       };
       function writeUserData(userData) {
         var newUserRef = userRef.push();
         newUserRef.set(userData);
       }
-      console.log(userData);
-      alert(userData);
-      writeUserData(userData);
+
+      if (this.state.password === SUBMISSION_PASSWORD) {
+        writeUserData(userData);
+        alert(
+          "Thanks " +
+            firstName +
+            " " +
+            lastName +
+            "! Your information has been submitted."
+        );
+        this.setState({
+          firstName: "",
+          lastName: "",
+          ticketNumber: "",
+          carYear: "",
+          carMake: "",
+          carDescription: "",
+          infractionType: "",
+          policeOfficer: "",
+          policeVehicle: "",
+          isCarModified: "",
+          isBrakesChecked: false,
+          isCouplingDevicesChecked: false,
+          isExhaustChecked: false,
+          isFuelSystemChecked: false,
+          isLightsChecked: false,
+          isLoadSecurityChecked: false,
+          isSuspensionChecked: false,
+          isTiresChecked: false,
+          isWheelsRimsChecked: false,
+          isWipersChecked: false,
+          isOtherChecked: false,
+          infractionDate: undefined,
+          infractionTime: undefined,
+          incidentDescription: "",
+          currentPos: "",
+          instagramHandle: "",
+          hasFirstNameError: false,
+          hasLastNameError: false,
+          hasTicketNumberError: false,
+          hasCarYearError: false,
+          hasCarMakeError: false,
+          hasInfractionTypeError: false,
+          hasPoliceOfficerError: false,
+          hasPoliceVehicleError: false,
+          hasisCarModifiedError: false,
+          hasMeasuringEquipmentError: false,
+          validate: false,
+          password: ""
+        });
+      } else {
+        alert("PASSWORD INCORRECT");
+      }
     }
   }
 
@@ -227,7 +281,8 @@ class SubmissionForum extends Component {
       isWipersChecked,
       isOtherChecked,
       incidentDescription,
-      validate
+      validate,
+      password
     } = this.state;
     const rowStyle = {
       display: "flex",
@@ -261,8 +316,8 @@ class SubmissionForum extends Component {
     const forumDescription = {
       textAlign: "center",
       fontWeight: "",
-      color: "#adadad",
-      marginBottom: "50px",
+      color: "#878787",
+      marginBottom: "5px",
       fontSize: "13px"
     };
     const forumBackground = {
@@ -287,7 +342,51 @@ class SubmissionForum extends Component {
               Submit your VI information to be a part of the dataset. Use your
               ticket to fill out as much as you can. Your information will be
               analysed and added to the database to create statistics on the
-              home page that everyone can use.
+              home page that everyone can use. Submissions are password
+              protected. Please contact me if you would like to submit your VI.
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                padding: "5%",
+                marginBottom: "40px"
+              }}
+            >
+              <div
+                style={{ padding: "4px", fontWeight: "bold", color: "#5c5c5c" }}
+              >
+                PASSWORD:
+              </div>
+              <div>
+                <Textbox
+                  attributesWrapper={{}}
+                  attributesInput={{
+                    id: "Enter Password",
+                    firstName: "Password",
+                    type: "text",
+                    placeholder: "Enter Password"
+                  }}
+                  onBlur={() => {}}
+                  value={password}
+                  validate={validate}
+                  validationCallback={res =>
+                    this.setState({
+                      hasPasswordError: res,
+                      validate: false
+                    })
+                  }
+                  onChange={(password, e) => {
+                    this.setState({ password });
+                  }}
+                  validationOption={{
+                    name: "Password", // To display in the Error message. i.e Please enter your ${name}.
+                    check: true, // To determin if you need to validate.
+                    required: true // To determin if it is a required field.
+                  }}
+                />
+              </div>
             </div>
           </div>
           <form onSubmit={this.validateForm}>
@@ -388,7 +487,7 @@ class SubmissionForum extends Component {
                           showWeekNumbers: true,
                           todayButton: "Today"
                         }}
-                        style={{ padding: "10px" }}
+                        style={{ margin: "10px", height: "100%" }}
                       />
                     </div>
                   </div>

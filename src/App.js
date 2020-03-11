@@ -5,11 +5,9 @@ import "react-day-picker/lib/style.css";
 import SubmissionForum from "./SubmissionForum";
 import HomePage from "./HomePage";
 import AboutPage from "./AboutPage";
+import AdminConsole from "./AdminConsole";
 
 const navTitleStyle = {
-  // alignItems: "center",
-  // justifyContent: "space-between",
-  // padding: "2%",
   textDecoration: "none",
   fontSize: "25px",
   fontFamily: "Arial, Helvetica, sans-serif",
@@ -24,9 +22,20 @@ class App extends Component {
   }
   render() {
     return (
+      // <AdminConsole />
       <Router>
         <div>
-          <h2></h2>
+          <div
+            style={{
+              fontSize: "10px",
+              fontWeight: "bold",
+              color: "#5c5c5c",
+              fontFamily: "Arial, Helvetica, sans-serif",
+              paddingBottom: "4px"
+            }}
+          >
+            VEHICLE INSPECTION DATABASE
+          </div>
           <nav>
             <div className="navBar">
               <div>
