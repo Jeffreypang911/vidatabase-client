@@ -27,39 +27,43 @@ class MapDisplay extends Component {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           />
           {this.props.userData &&
-            this.props.userData.map((user, idx) => (
-              <Marker key={`marker-${idx}`} position={user.currentPos}>
-                <Popup>
-                  <span>
-                    <b>Name: </b> {user.firstName} {user.lastName}
-                    <br />
-                    <b>Vehicle: </b> {user.carYear} {user.carMake}
-                    <br />
-                    <b>Vehicle Description: </b> {user.carDescription}
-                    <br />
-                    <b>Violation Type: </b> {user.infractionType}
-                    <br />
-                    <b>Police Officer: </b> {user.policeOfficer}
-                    <br />
-                    <b>Incident Description: </b>
-                    {user.incidentDescription}
-                    <br />
-                    {user.instagramHandle && (
-                      <div>
-                        <b>Instagram: </b>
-                        <a
-                          href={
-                            "https://www.instagram.com/" + user.instagramHandle
-                          }
-                        >
-                          @{user.instagramHandle}
-                        </a>
-                      </div>
-                    )}
-                  </span>
-                </Popup>
-              </Marker>
-            ))}
+            this.props.userData.map(
+              (user, idx) =>
+                user.currentPos && (
+                  <Marker key={`marker-${idx}`} position={user.currentPos}>
+                    <Popup>
+                      <span>
+                        <b>Name: </b> {user.firstName} {user.lastName}
+                        <br />
+                        <b>Vehicle: </b> {user.carYear} {user.carMake}
+                        <br />
+                        <b>Vehicle Description: </b> {user.carDescription}
+                        <br />
+                        <b>Violation Type: </b> {user.infractionType}
+                        <br />
+                        <b>Police Officer: </b> {user.policeOfficer}
+                        <br />
+                        <b>Incident Description: </b>
+                        {user.incidentDescription}
+                        <br />
+                        {user.instagramHandle && (
+                          <div>
+                            <b>Instagram: </b>
+                            <a
+                              href={
+                                "https://www.instagram.com/" +
+                                user.instagramHandle
+                              }
+                            >
+                              @{user.instagramHandle}
+                            </a>
+                          </div>
+                        )}
+                      </span>
+                    </Popup>
+                  </Marker>
+                )
+            )}
         </Map>
       </div>
     );
