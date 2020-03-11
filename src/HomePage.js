@@ -126,7 +126,7 @@ class HomePage extends Component {
     //This is confusing but it is so we can display a default value of 0 people for
     //the time of day, since charts.js just hides the bar if it has no value. The function checks if
     //it is the time data, then will change 0 count to the data count based on index.
-    if (sortedData[1].value.toString().includes(":00")) {
+    if (sortedData[0].value.toString().includes(":00")) {
       labels = TIME_LIST;
       data = DEFAULT_VALUES_TIME;
       sortedData.forEach(arg1 => {
@@ -137,7 +137,7 @@ class HomePage extends Component {
           }
         });
       });
-    } else if (sortedData[1].value.toString().includes("Checked")) {
+    } else if (sortedData[0].value.toString().includes("Checked")) {
       //So this is the same as above but even more complicated because I can use the default key "isBrakesChecked"
       //as the displayed lable so I have to sort through all the infraction types, match them up with the INFRACTION_TYPE
       //array to find the index, then actually reset labels to a INFRACTION_LABLES to get the lables I actually want to
