@@ -389,6 +389,51 @@ class SubmissionForum extends Component {
               </div>
             </div>
           </div>
+          <div style={rowWrapperStyle}>
+            <div style={rowContainerStyle}>
+              <div style={rowStyle}>
+                <div
+                  style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                >
+                  <span
+                    className="icon icon-person"
+                    style={{ ...labelContentStyle, fontSize: "20px" }}
+                  />
+
+                  <span style={labelContentStyle}>Ticket Number</span>
+                </div>
+
+                <div style={{ flex: "6 6 0px", margin: "10px" }}>
+                  <Textbox
+                    attributesWrapper={{}}
+                    attributesInput={{
+                      id: "ticketNumber",
+                      ticketNumber: "ticketNumber",
+                      type: "text",
+                      placeholder: "Ticket Number"
+                    }}
+                    onBlur={() => {}}
+                    value={ticketNumber} // Optional.[String].Default: "".
+                    validate={validate} //is it validating? Boolen
+                    validationCallback={res =>
+                      this.setState({
+                        hasTicketNumberError: res,
+                        validate: false
+                      })
+                    }
+                    onChange={(ticketNumber, e) => {
+                      this.setState({ ticketNumber });
+                    }}
+                    validationOption={{
+                      name: "Ticket number", // To display in the Error message. i.e Please enter your ${name}.
+                      check: true, // To determin if you need to validate.
+                      required: true // To determin if it is a required field.
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
           <form onSubmit={this.validateForm}>
             <div style={rowWrapperStyle}>
               <div style={rowContainerStyle}>
@@ -474,7 +519,7 @@ class SubmissionForum extends Component {
                     />
 
                     <span style={labelContentStyle}>
-                      Date and Time <br></br>of Infraction
+                      Date and Time of Infraction
                     </span>
                   </div>
                   <div style={{ flex: "6 6 0px" }}>
@@ -538,9 +583,7 @@ class SubmissionForum extends Component {
                       className="icon icon-bookmark"
                       style={{ ...labelContentStyle, fontSize: "20px" }}
                     />
-                    <span style={labelContentStyle}>
-                      Year and Make <br></br>of Vehicle
-                    </span>
+                    <span style={labelContentStyle}>Year/Make of Vehicle</span>
                   </div>
                   <div style={{ flex: "6 6 0px" }}>
                     <Select
@@ -613,12 +656,47 @@ class SubmissionForum extends Component {
                   <div
                     style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
                   >
+                    <span style={labelContentStyle}>Is Your Car Modified?</span>
+                  </div>
+
+                  <div style={{ flex: "6 6 0px", display: "flex" }}>
+                    <Radiobox
+                      disabled={false}
+                      value={isCarModified} // Optional.[String].Default: "".
+                      validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
+                      validationCallback={res =>
+                        this.setState({
+                          hasisCarModifiedError: res,
+                          validate: false
+                        })
+                      } // Optional.[Func].Default: none. Return the validation result.
+                      optionList={YES_NO_LIST}
+                      customStyleOptionListItem={{ marginRight: "20px" }} // Optional.[Object].Default: {}.
+                      onChange={isCarModified => {
+                        this.setState({ isCarModified });
+                      }}
+                      validationOption={{
+                        name: "answer", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
+                        check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
+                        required: true // Optional.[Bool].Default: true. To determin if it is a required field.
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style={rowWrapperStyle}>
+              <div style={rowContainerStyle}>
+                <div style={rowStyle}>
+                  <div
+                    style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
+                  >
                     <span
                       className="icon icon-insert-drive-file"
                       style={{ ...labelContentStyle, fontSize: "20px" }}
                     />
                     <span style={labelContentStyle}>
-                      Description of Car Model, <br></br>Modifications, Ect.{" "}
+                      Description of Vehicle and Modifications.{" "}
                     </span>
                   </div>
                   <div style={{ flex: "6 6 0px" }}>
@@ -644,51 +722,6 @@ class SubmissionForum extends Component {
                         check: true,
                         required: true,
                         type: "string"
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div style={rowWrapperStyle}>
-              <div style={rowContainerStyle}>
-                <div style={rowStyle}>
-                  <div
-                    style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
-                  >
-                    <span
-                      className="icon icon-person"
-                      style={{ ...labelContentStyle, fontSize: "20px" }}
-                    />
-
-                    <span style={labelContentStyle}>Ticket Number</span>
-                  </div>
-
-                  <div style={{ flex: "6 6 0px", margin: "10px" }}>
-                    <Textbox
-                      attributesWrapper={{}}
-                      attributesInput={{
-                        id: "ticketNumber",
-                        ticketNumber: "ticketNumber",
-                        type: "text",
-                        placeholder: "Ticket Number"
-                      }}
-                      onBlur={() => {}}
-                      value={ticketNumber} // Optional.[String].Default: "".
-                      validate={validate} //is it validating? Boolen
-                      validationCallback={res =>
-                        this.setState({
-                          hasTicketNumberError: res,
-                          validate: false
-                        })
-                      }
-                      onChange={(ticketNumber, e) => {
-                        this.setState({ ticketNumber });
-                      }}
-                      validationOption={{
-                        name: "Ticket number", // To display in the Error message. i.e Please enter your ${name}.
-                        check: true, // To determin if you need to validate.
-                        required: true // To determin if it is a required field.
                       }}
                     />
                   </div>
@@ -789,41 +822,6 @@ class SubmissionForum extends Component {
                       }}
                       validationOption={{
                         name: "police vehicle", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
-                        check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
-                        required: true // Optional.[Bool].Default: true. To determin if it is a required field.
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div style={rowWrapperStyle}>
-              <div style={rowContainerStyle}>
-                <div style={rowStyle}>
-                  <div
-                    style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
-                  >
-                    <span style={labelContentStyle}>Is Your Car Modified?</span>
-                  </div>
-
-                  <div style={{ flex: "6 6 0px", display: "flex" }}>
-                    <Radiobox
-                      disabled={false}
-                      value={isCarModified} // Optional.[String].Default: "".
-                      validate={validate} // Optional.[Bool].Default: false. If you have a submit button and trying to validate all the inputs of your form at onece, toggle it to true, then it will validate the field and pass the result via the "validationCallback" you provide.
-                      validationCallback={res =>
-                        this.setState({
-                          hasisCarModifiedError: res,
-                          validate: false
-                        })
-                      } // Optional.[Func].Default: none. Return the validation result.
-                      optionList={YES_NO_LIST}
-                      customStyleOptionListItem={{ marginRight: "20px" }} // Optional.[Object].Default: {}.
-                      onChange={isCarModified => {
-                        this.setState({ isCarModified });
-                      }}
-                      validationOption={{
-                        name: "answer", // Optional.[String].Default: "". To display in the Error message. i.e Please enter your ${name}.
                         check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
                         required: true // Optional.[Bool].Default: true. To determin if it is a required field.
                       }}
@@ -1099,7 +1097,8 @@ class SubmissionForum extends Component {
                       attributesInput={{
                         id: "incidentDescription",
                         name: "incidentDescription",
-                        placeholder: "Describe What Happened",
+                        placeholder:
+                          "Describe What Happened, Your Experience With VPD, Ect.",
                         maxLength: "1000",
                         cols: "10",
                         rows: "7"
