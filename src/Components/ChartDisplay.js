@@ -29,8 +29,8 @@ class ChartDisplay extends Component {
           <div className="chart">
             <div className="chartboarder">
               <Line
-                width={"100%"}
-                height={"70%"}
+                width={100}
+                height={70}
                 data={this.props.hoursTicketedData}
                 options={{
                   scales: {
@@ -55,8 +55,8 @@ class ChartDisplay extends Component {
           <div className="chart">
             <div className="chartboarder">
               <HorizontalBar
-                width={"100%"}
-                height={"70%"}
+                width={100}
+                height={70}
                 data={this.props.violationTypes}
                 options={{
                   scales: {
@@ -84,8 +84,8 @@ class ChartDisplay extends Component {
           <div className="chart">
             <div className="chartboarder">
               <Pie
-                width={"100%"}
-                height={"70%"}
+                width={100}
+                height={70}
                 data={this.props.vehicleBrandData}
                 options={{
                   title: {
@@ -104,8 +104,8 @@ class ChartDisplay extends Component {
           <div className="chart">
             <div className="chartboarder">
               <Bar
-                width={"100%"}
-                height={"70%"}
+                width={100}
+                height={70}
                 data={this.props.policeOfficersData}
                 options={{
                   scales: {

@@ -100,9 +100,10 @@ class AboutPage extends Component {
               <a
                 href="https://bc.ctvnews.ca/sports-car-enthusiasts-believe-they-re-being-unfairly-targeted-by-vancouver-police-1.4331471?fbclid=IwAR3UzcEcTgh28omI2RkswO1XP-rHo2I9VWLtfconWELtnoIhjmh7-3GHx-M"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <div style={imageBoarer}>
-                  <img style={image} src={CTVNewsImage}></img>
+                  <img style={image} src={CTVNewsImage} alt="CTV News"></img>
                 </div>
               </a>
               <div style={description}>CTV News Coverage</div>
@@ -111,9 +112,10 @@ class AboutPage extends Component {
               <a
                 href="https://www.citynews1130.com/2020/03/05/sports-car-drivers-believe-targeted-vancouver/"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <div style={imageBoarer}>
-                  <img style={image} src={CityNewsImage}></img>
+                  <img style={image} src={CityNewsImage} alt="City News"></img>
                 </div>
               </a>
               <div style={description}>CityNews Coverage</div>
@@ -122,9 +124,14 @@ class AboutPage extends Component {
               <a
                 href="https://www.facebook.com/pcacanadawest/posts/3236815123012907"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <div style={imageBoarer}>
-                  <img style={image} src={PCAFacebookImage}></img>
+                  <img
+                    style={image}
+                    src={PCAFacebookImage}
+                    alt="PCA Facebook"
+                  ></img>
                 </div>
               </a>
               <div style={description}>PCA Facebook Post</div>
@@ -136,6 +143,7 @@ class AboutPage extends Component {
             <a
               href="http://www.bclaws.ca/civix/document/id/complete/statreg/96318_00"
               target="_blank"
+              rel="noopener noreferrer"
             >
               BC Motor Vehicle Act
             </a>
@@ -143,6 +151,7 @@ class AboutPage extends Component {
             <a
               href="https://vancouver.ca/police/assets/pdf/2020-business-plan.pdf?fbclid=IwAR0FwQ5C4pQ8IdRgmHTNQTwYIOwat8tq2Qv8bWaqDembnP54XgUEA64dcLw"
               target="_blank"
+              rel="noopener noreferrer"
             >
               VPD 2020 Stratigic Business Plan
             </a>
@@ -150,6 +159,7 @@ class AboutPage extends Component {
             <a
               href="https://www.unece.org/fileadmin/DAM/trans/doc/2007/wp29grb/ECE-TRANS-WP29-GRB-45-inf01e.pdf?fbclid=IwAR1WvKtXZFFNNAOWm06XmXTqvvqmuZabUJhG0_PrreUaV_iLZvflYrlEJZ8"
               target="_blank"
+              rel="noopener noreferrer"
             >
               ISO5130 Vehicle Acoustics
             </a>

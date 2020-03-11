@@ -62,9 +62,11 @@ class SubmissionForum extends Component {
       isBrakesChecked: false,
       isCouplingDevicesChecked: false,
       isExhaustChecked: false,
+      isBodyFrameChecked: false,
       isFuelSystemChecked: false,
       isLightsChecked: false,
       isLoadSecurityChecked: false,
+      isSteeringChecked: false,
       isSuspensionChecked: false,
       isTiresChecked: false,
       isWheelsRimsChecked: false,
@@ -138,9 +140,11 @@ class SubmissionForum extends Component {
       isBrakesChecked,
       isCouplingDevicesChecked,
       isExhaustChecked,
+      isBodyFrameChecked,
       isFuelSystemChecked,
       isLightsChecked,
       isLoadSecurityChecked,
+      isSteeringChecked,
       isSuspensionChecked,
       isTiresChecked,
       isWheelsRimsChecked,
@@ -164,9 +168,11 @@ class SubmissionForum extends Component {
         isBrakesChecked: isBrakesChecked,
         isCouplingDevicesChecked: isCouplingDevicesChecked,
         isExhaustChecked: isExhaustChecked,
+        isBodyFrameChecked: isBodyFrameChecked,
         isFuelSystemChecked: isFuelSystemChecked,
         isLightsChecked: isLightsChecked,
         isLoadSecurityChecked: isLoadSecurityChecked,
+        isSteeringChecked: isSteeringChecked,
         isSuspensionChecked: isSuspensionChecked,
         isTiresChecked: isTiresChecked,
         isWheelsRimsChecked: isWheelsRimsChecked,
@@ -223,9 +229,11 @@ class SubmissionForum extends Component {
           isBrakesChecked: false,
           isCouplingDevicesChecked: false,
           isExhaustChecked: false,
+          isBodyFrameChecked: false,
           isFuelSystemChecked: false,
           isLightsChecked: false,
           isLoadSecurityChecked: false,
+          isSteeringChecked: false,
           isSuspensionChecked: false,
           isTiresChecked: false,
           isWheelsRimsChecked: false,
@@ -272,10 +280,12 @@ class SubmissionForum extends Component {
       isBrakesChecked,
       isCouplingDevicesChecked,
       isExhaustChecked,
+      isBodyFrameChecked,
       isFuelSystemChecked,
       isLightsChecked,
       isLoadSecurityChecked,
       isSuspensionChecked,
+      isSteeringChecked,
       isTiresChecked,
       isWheelsRimsChecked,
       isWipersChecked,
@@ -889,6 +899,22 @@ class SubmissionForum extends Component {
                       }}
                     />
                     <Checkbox
+                      checked={isBodyFrameChecked}
+                      onBlur={() => {}}
+                      onChange={(isBodyFrameChecked, e) => {
+                        this.setState({ isBodyFrameChecked });
+                      }}
+                      labelHtml={
+                        <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                          Body/Frame
+                        </div>
+                      }
+                      validationOption={{
+                        check: false,
+                        required: false
+                      }}
+                    />
+                    <Checkbox
                       checked={isFuelSystemChecked}
                       onBlur={() => {}}
                       onChange={(isFuelSystemChecked, e) => {
@@ -929,6 +955,22 @@ class SubmissionForum extends Component {
                       labelHtml={
                         <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
                           Load Security
+                        </div>
+                      }
+                      validationOption={{
+                        check: false,
+                        required: false
+                      }}
+                    />
+                    <Checkbox
+                      checked={isSteeringChecked}
+                      onBlur={() => {}}
+                      onChange={(isSteeringChecked, e) => {
+                        this.setState({ isSteeringChecked });
+                      }}
+                      labelHtml={
+                        <div style={{ color: "#4a4a4a", marginTop: "2px" }}>
+                          Steering
                         </div>
                       }
                       validationOption={{

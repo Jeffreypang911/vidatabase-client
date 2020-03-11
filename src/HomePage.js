@@ -85,7 +85,6 @@ class HomePage extends Component {
     );
     const hoursTicketedList = this.getChartData(this.arraySort(hoursTicketed));
     const isCarModifiedList = this.getChartData(this.arraySort(isCarModified));
-    console.log("violationTypesList", violationTypesList);
     this.setState({
       policeVehicle: policeVehicleList,
       vehicleBrand: vehicleBrandList,
