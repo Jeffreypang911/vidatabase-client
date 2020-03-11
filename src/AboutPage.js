@@ -149,13 +149,10 @@ class AboutPage extends Component {
           </div>
 
           <div style={textDiv}>
-            I spent a lot of time building this. Both the database and domain
-            costs are fronted by myself. I do this to only attempt to help the
-            community I care about - we share a common passion for cars and I
-            hope someone out there will find this useful. As long as people use
-            it I will continue to put hours into it to improve the UX/UI and fix
-            bugs, as well as clean up the dataset when obviously false
-            information is submitted. <br />
+            We share a common passion for cars and I hope someone out there will
+            find this useful. As long as people use it I will continue to put
+            hours into it to improve the UX/UI and fix bugs, as well as clean up
+            the dataset. <br />
             <br />
             Thank you for visiting! <br />
             <br />

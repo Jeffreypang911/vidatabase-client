@@ -22,51 +22,51 @@ class App extends Component {
   }
   render() {
     return (
-      // <AdminConsole />
-      <Router>
-        <div>
-          <div
-            style={{
-              fontSize: "10px",
-              fontWeight: "bold",
-              color: "#5c5c5c",
-              fontFamily: "Arial, Helvetica, sans-serif",
-              paddingBottom: "4px"
-            }}
-          >
-            VEHICLE INSPECTION DATABASE
-          </div>
-          <nav>
-            <div className="navBar">
-              <div>
-                <Link style={navTitleStyle} to={"/"} className="nav-link">
-                  HOME
-                </Link>
-              </div>
-              <div>
-                <Link
-                  style={navTitleStyle}
-                  to={"/submission"}
-                  className="nav-link"
-                >
-                  SUBMISSION
-                </Link>
-              </div>
-              <div>
-                <Link style={navTitleStyle} to={"/about"} className="nav-link">
-                  ABOUT
-                </Link>
-              </div>
-            </div>
-          </nav>
-          <hr />
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route path="/submission" component={SubmissionForum} />
-            <Route path="/about" component={AboutPage} />
-          </Switch>
-        </div>
-      </Router>
+      <AdminConsole />
+      // <Router>
+      //   <div>
+      //     <div
+      //       style={{
+      //         fontSize: "10px",
+      //         fontWeight: "bold",
+      //         color: "#5c5c5c",
+      //         fontFamily: "Arial, Helvetica, sans-serif",
+      //         paddingBottom: "4px"
+      //       }}
+      //     >
+      //       VEHICLE INSPECTION DATABASE
+      //     </div>
+      //     <nav>
+      //       <div className="navBar">
+      //         <div>
+      //           <Link style={navTitleStyle} to={"/"} className="nav-link">
+      //             HOME
+      //           </Link>
+      //         </div>
+      //         <div>
+      //           <Link
+      //             style={navTitleStyle}
+      //             to={"/submission"}
+      //             className="nav-link"
+      //           >
+      //             SUBMISSION
+      //           </Link>
+      //         </div>
+      //         <div>
+      //           <Link style={navTitleStyle} to={"/about"} className="nav-link">
+      //             ABOUT
+      //           </Link>
+      //         </div>
+      //       </div>
+      //     </nav>
+      //     <hr />
+      //     <Switch>
+      //       <Route exact path="/" component={HomePage} />
+      //       <Route path="/submission" component={SubmissionForum} />
+      //       <Route path="/about" component={AboutPage} />
+      //     </Switch>
+      //   </div>
+      // </Router>
     );
   }
 }
