@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import CTVNewsImage from "./assets/CTVnews";
-import CityNewsImage from "./assets/CityNews";
-import PCAFacebookImage from "./assets/PCAfacebook";
+import CTVNewsImage from "./assets/CTVnews.jpg";
+import CityNewsImage from "./assets/CityNews.jpg";
+import PCAFacebookImage from "./assets/PCAfacebook.jpg";
 import styled from "styled-components";
 
 const mainContainer = {
