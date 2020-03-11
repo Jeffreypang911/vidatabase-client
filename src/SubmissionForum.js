@@ -518,9 +518,7 @@ class SubmissionForum extends Component {
                       style={{ ...labelContentStyle, fontSize: "20px" }}
                     />
 
-                    <span style={labelContentStyle}>
-                      Date and Time of Infraction
-                    </span>
+                    <span style={labelContentStyle}>Date and Time of VI</span>
                   </div>
                   <div style={{ flex: "6 6 0px" }}>
                     <div>
@@ -532,7 +530,6 @@ class SubmissionForum extends Component {
                           showWeekNumbers: true,
                           todayButton: "Today"
                         }}
-                        style={{ margin: "10px", height: "100%" }}
                       />
                     </div>
                   </div>
@@ -734,7 +731,7 @@ class SubmissionForum extends Component {
                   <div
                     style={{ ...labelStyle, flex: "3 3 0px", marginTop: "3px" }}
                   >
-                    <span style={labelContentStyle}>Infraction Type</span>
+                    <span style={labelContentStyle}>VI Type</span>
                   </div>
                   <div style={{ flex: "6 6 0px", display: "flex" }}>
                     <Radiobox
