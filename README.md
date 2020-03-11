@@ -1,8 +1,44 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## THE VI DATABASE
+
+My goal of this project is to build a non-biased dataset that can
+educate the Vancouver car community of where vehicle inspections are
+given and other ticket related statistics. Often these inspection
+notices are given to vehicles by police stating they do not comply
+with the BC Motor Vehicle Act. The owners of said vehicles then need
+to get their car inspected (costing from $300-$400) to prove they
+are innocent. My vehicle was given this inspection notice in late 2019.
+
+This app uses React, React Router, Leaflet Maps, Charts.js, Input Field
+Validations, and Firebase.
+
+## Screen Shots
+
+![Charts](/src/assets/Charts.jpg' "Charts")
+![Map](/src/assets/Map.jpg' "Map")
+
+## ENV Variables
+
+REACT_APP_FIREBASE_KEY:"xxxxxxxxxxx"
+REACT_APP_FIREBASE_DOMAIN:"xxxxxxxxxxx"
+REACT_APP_FIREBASE_DATABASE:"xxxxxxxxxxx"
+REACT_APP_FIREBASE_PROJECT_ID:"xxxxxxxxxxx"
+REACT_APP_FIREBASE_STORAGE_BUCKET:"xxxxxxxxxxx"
+REACT_APP_FIREBASE_SENDER_ID:"xxxxxxxxxxx"
+REACT_APP_FIREBASE_APP_ID:"xxxxxxxxxxx"
+REACT_APP_SUBMISSION_PASSWORD:"xxxxxxxxxxx"
+
+Uses ENV variables for Firebase Auth. Set submission form password to
+whatever you want the password should be. All the stuff below is stuff
+mostly from the create React App starter readme since thats that boilerplate
+I used to build this. Follow it to run the app.
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you can run:<br />
+
+### `yarn install`
+
+Installs everythin you know da drill. <br />
 
 ### `yarn start`
 
