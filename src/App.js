@@ -5,7 +5,6 @@ import "react-day-picker/lib/style.css";
 import SubmissionForum from "./SubmissionForum";
 import HomePage from "./HomePage";
 import AboutPage from "./AboutPage";
-import AdminConsole from "./AdminConsole";
 
 const navTitleStyle = {
   textDecoration: "none",
@@ -22,7 +21,6 @@ class App extends Component {
   }
   render() {
     return (
-      // <AdminConsole />
       <Router>
         <div>
           <div
