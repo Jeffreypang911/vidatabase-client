@@ -163,7 +163,7 @@ class HomePage extends Component {
       labels: labels,
       datasets: [
         {
-          label: "Ticked People",
+          label: "Ticketed People",
           data: data,
           backgroundColor: [
             //Default Color Swatch
