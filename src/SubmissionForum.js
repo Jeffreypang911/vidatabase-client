@@ -155,7 +155,7 @@ class SubmissionForum extends Component {
       if (
         !hasFirstNameError &&
         !hasLastNameError &&
-        !hasTicketNumberError &&
+        // !hasTicketNumberError &&
         !hasCarYearError &&
         !hasCarMakeError &&
         !hasPoliceOfficerError &&
@@ -273,7 +273,7 @@ class SubmissionForum extends Component {
     const {
       lastName,
       firstName,
-      ticketNumber,
+      // ticketNumber,
       infractionTime,
       carYear,
       carMake,
@@ -405,7 +405,7 @@ class SubmissionForum extends Component {
               </div>
             </div>
           </div>
-          <div style={rowWrapperStyle}>
+          {/* <div style={rowWrapperStyle}>
             <div style={rowContainerStyle}>
               <div style={rowStyle}>
                 <div
@@ -449,7 +449,7 @@ class SubmissionForum extends Component {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <form onSubmit={this.validateForm}>
             <div style={rowWrapperStyle}>
               <div style={rowContainerStyle}>
