@@ -75,7 +75,7 @@ class SubmissionForum extends Component {
       infractionDate: undefined,
       infractionTime: undefined,
       incidentDescription: "",
-      currentPos: "",
+      currentPos: undefined,
       instagramHandle: "",
       hasFirstNameError: true,
       hasLastNameError: true,
@@ -151,117 +151,121 @@ class SubmissionForum extends Component {
       isWipersChecked,
       isOtherChecked
     } = this.state;
-    if (
-      !hasFirstNameError &&
-      !hasLastNameError &&
-      !hasTicketNumberError &&
-      !hasCarYearError &&
-      !hasCarMakeError &&
-      !hasPoliceOfficerError &&
-      !hasPoliceVehicleError &&
-      !hasInfractionTypeError &&
-      !hasinfractionTimeError &&
-      !hasisCarModifiedError &&
-      !hasPasswordError
-    ) {
-      const violations = {
-        isBrakesChecked: isBrakesChecked,
-        isCouplingDevicesChecked: isCouplingDevicesChecked,
-        isExhaustChecked: isExhaustChecked,
-        isBodyFrameChecked: isBodyFrameChecked,
-        isFuelSystemChecked: isFuelSystemChecked,
-        isLightsChecked: isLightsChecked,
-        isLoadSecurityChecked: isLoadSecurityChecked,
-        isSteeringChecked: isSteeringChecked,
-        isSuspensionChecked: isSuspensionChecked,
-        isTiresChecked: isTiresChecked,
-        isWheelsRimsChecked: isWheelsRimsChecked,
-        isWipersChecked: isWipersChecked,
-        isOtherChecked: isOtherChecked
-      };
-      const instagramText = instagramHandle.replace("@", "");
-      const userData = {
-        creationDateUnix: new Date().getTime() / 1000,
-        firstName: firstName,
-        lastName: lastName,
-        infractionDate: infractionDate,
-        infractionTime: infractionTime,
-        carYear: carYear,
-        carMake: carMake,
-        carDescription: carDescription,
-        ticketNumber: ticketNumber,
-        infractionType: infractionType,
-        policeOfficer: policeOfficer,
-        policeVehicle: policeVehicle,
-        isCarModified: isCarModified,
-        violations: violations,
-        currentPos: currentPos,
-        incidentDescription: incidentDescription,
-        instagramHandle: instagramText,
-        displayOnMap: true,
-        includeInData: true
-      };
-      function writeUserData(userData) {
-        var newUserRef = userRef.push();
-        newUserRef.set(userData);
-      }
+    if (this.state.currentPos) {
+      if (
+        !hasFirstNameError &&
+        !hasLastNameError &&
+        !hasTicketNumberError &&
+        !hasCarYearError &&
+        !hasCarMakeError &&
+        !hasPoliceOfficerError &&
+        !hasPoliceVehicleError &&
+        !hasInfractionTypeError &&
+        !hasinfractionTimeError &&
+        !hasisCarModifiedError &&
+        !hasPasswordError
+      ) {
+        const violations = {
+          isBrakesChecked: isBrakesChecked,
+          isCouplingDevicesChecked: isCouplingDevicesChecked,
+          isExhaustChecked: isExhaustChecked,
+          isBodyFrameChecked: isBodyFrameChecked,
+          isFuelSystemChecked: isFuelSystemChecked,
+          isLightsChecked: isLightsChecked,
+          isLoadSecurityChecked: isLoadSecurityChecked,
+          isSteeringChecked: isSteeringChecked,
+          isSuspensionChecked: isSuspensionChecked,
+          isTiresChecked: isTiresChecked,
+          isWheelsRimsChecked: isWheelsRimsChecked,
+          isWipersChecked: isWipersChecked,
+          isOtherChecked: isOtherChecked
+        };
+        const instagramText = instagramHandle.replace("@", "");
+        const userData = {
+          creationDateUnix: new Date().getTime() / 1000,
+          firstName: firstName,
+          lastName: lastName,
+          infractionDate: infractionDate,
+          infractionTime: infractionTime,
+          carYear: carYear,
+          carMake: carMake,
+          carDescription: carDescription,
+          ticketNumber: ticketNumber,
+          infractionType: infractionType,
+          policeOfficer: policeOfficer,
+          policeVehicle: policeVehicle,
+          isCarModified: isCarModified,
+          violations: violations,
+          currentPos: currentPos,
+          incidentDescription: incidentDescription,
+          instagramHandle: instagramText,
+          displayOnMap: true,
+          includeInData: true
+        };
+        function writeUserData(userData) {
+          var newUserRef = userRef.push();
+          newUserRef.set(userData);
+        }
 
-      if (this.state.password === SUBMISSION_PASSWORD) {
-        writeUserData(userData);
-        alert(
-          "Thanks " +
-            firstName +
-            " " +
-            lastName +
-            "! Your information has been submitted."
-        );
-        this.setState({
-          firstName: "",
-          lastName: "",
-          ticketNumber: "",
-          carYear: "",
-          carMake: "",
-          carDescription: "",
-          infractionType: "",
-          policeOfficer: "",
-          policeVehicle: "",
-          isCarModified: "",
-          isBrakesChecked: false,
-          isCouplingDevicesChecked: false,
-          isExhaustChecked: false,
-          isBodyFrameChecked: false,
-          isFuelSystemChecked: false,
-          isLightsChecked: false,
-          isLoadSecurityChecked: false,
-          isSteeringChecked: false,
-          isSuspensionChecked: false,
-          isTiresChecked: false,
-          isWheelsRimsChecked: false,
-          isWipersChecked: false,
-          isOtherChecked: false,
-          infractionDate: undefined,
-          infractionTime: undefined,
-          incidentDescription: "",
-          currentPos: "",
-          instagramHandle: "",
-          hasFirstNameError: false,
-          hasLastNameError: false,
-          hasTicketNumberError: false,
-          hasCarYearError: false,
-          hasCarMakeError: false,
-          hasInfractionTypeError: false,
-          hasPoliceOfficerError: false,
-          hasPoliceVehicleError: false,
-          hasisCarModifiedError: false,
-          hasMeasuringEquipmentError: false,
-          validate: false,
-          password: ""
-        });
+        if (this.state.password === SUBMISSION_PASSWORD) {
+          writeUserData(userData);
+          alert(
+            "Thanks " +
+              firstName +
+              " " +
+              lastName +
+              "! Your information has been submitted."
+          );
+          this.setState({
+            firstName: "",
+            lastName: "",
+            ticketNumber: "",
+            carYear: "",
+            carMake: "",
+            carDescription: "",
+            infractionType: "",
+            policeOfficer: "",
+            policeVehicle: "",
+            isCarModified: "",
+            isBrakesChecked: false,
+            isCouplingDevicesChecked: false,
+            isExhaustChecked: false,
+            isBodyFrameChecked: false,
+            isFuelSystemChecked: false,
+            isLightsChecked: false,
+            isLoadSecurityChecked: false,
+            isSteeringChecked: false,
+            isSuspensionChecked: false,
+            isTiresChecked: false,
+            isWheelsRimsChecked: false,
+            isWipersChecked: false,
+            isOtherChecked: false,
+            infractionDate: undefined,
+            infractionTime: undefined,
+            incidentDescription: "",
+            currentPos: "",
+            instagramHandle: "",
+            hasFirstNameError: false,
+            hasLastNameError: false,
+            hasTicketNumberError: false,
+            hasCarYearError: false,
+            hasCarMakeError: false,
+            hasInfractionTypeError: false,
+            hasPoliceOfficerError: false,
+            hasPoliceVehicleError: false,
+            hasisCarModifiedError: false,
+            hasMeasuringEquipmentError: false,
+            validate: false,
+            password: ""
+          });
+        } else {
+          alert("Incorrect Password.");
+        }
       } else {
-        alert("PASSWORD INCORRECT");
+        alert("Enter all above input fields to submit.");
       }
     } else {
-      alert("Please enter all above input fields to submit.");
+      alert("Pin where the VI was given on the map to submit.");
     }
   }
 
