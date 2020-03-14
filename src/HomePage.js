@@ -32,7 +32,8 @@ class HomePage extends Component {
       hoursTicketed: [],
       isCarModified: [],
       policeVehicle: [],
-      violationTypes: []
+      violationTypes: [],
+      viBoxType: []
     };
   }
 
@@ -60,6 +61,7 @@ class HomePage extends Component {
     var hoursTicketed = [];
     var isCarModified = [];
     var violationTypes = [];
+    var viTypes = [];
     //userObj.xxxxx is the actual key in the Firebase Database
     array.forEach(userObj => {
       policeVehicle.push(userObj.policeVehicle);
@@ -67,6 +69,7 @@ class HomePage extends Component {
       policeOfficers.push(userObj.policeOfficer);
       hoursTicketed.push(userObj.infractionTime);
       isCarModified.push(userObj.isCarModified);
+      viTypes.push(userObj.infractionType);
 
       for (const property in userObj.violations) {
         if (userObj.violations[property] === true) {
@@ -85,13 +88,16 @@ class HomePage extends Component {
     );
     const hoursTicketedList = this.getChartData(this.arraySort(hoursTicketed));
     const isCarModifiedList = this.getChartData(this.arraySort(isCarModified));
+    const viList = this.getChartData(this.arraySort(viTypes));
+
     this.setState({
       policeVehicle: policeVehicleList,
       vehicleBrand: vehicleBrandList,
       policeOfficers: policeOfficersList,
       hoursTicketed: hoursTicketedList,
       isCarModified: isCarModifiedList,
-      violationTypes: violationTypesList
+      violationTypes: violationTypesList,
+      viBoxType: viList
     });
   };
 
@@ -271,6 +277,7 @@ class HomePage extends Component {
               isCarModifiedData={this.state.isCarModified}
               policeVehicleData={this.state.policeVehicle}
               violationTypes={this.state.violationTypes}
+              viBoxType={this.state.viBoxType}
             />
           </div>
         </div>
