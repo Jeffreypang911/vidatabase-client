@@ -136,22 +136,30 @@ class ChartDisplay extends Component {
             <div className="chartboarder">
               <Bar
                 width={100}
-                height={60}
-                data={this.props.policeVehicleData}
+                height={75}
+                data={this.props.viBoxType}
                 options={{
                   scales: {
+                    xAxes: [
+                      {
+                        ticks: {
+                          min: 0,
+                          stepSize: 2
+                        }
+                      }
+                    ],
                     yAxes: [
                       {
                         ticks: {
                           min: 0,
-                          stepSize: 1
+                          stepSize: 2
                         }
                       }
                     ]
                   },
                   title: {
                     display: this.props.displayTitle,
-                    text: "Types of Police Vehicles giving out the most VIs",
+                    text: "Most Common Type of VI Given",
                     fontSize: 16
                   },
                   options: { maintainAspectRatio: false }
@@ -161,24 +169,69 @@ class ChartDisplay extends Component {
           </div>
           <div className="chart">
             <div className="chartboarder">
-              <HorizontalBar
+              <Bar
                 width={100}
-                height={60}
-                data={this.props.viBoxType}
+                height={75}
+                data={this.props.policeVehicleData}
                 options={{
                   scales: {
                     xAxes: [
                       {
                         ticks: {
                           min: 0,
-                          stepSize: 1
+                          stepSize: 2
+                        }
+                      }
+                    ],
+                    yAxes: [
+                      {
+                        ticks: {
+                          min: 0,
+                          stepSize: 2
                         }
                       }
                     ]
                   },
                   title: {
                     display: this.props.displayTitle,
-                    text: "Most Common Type of VI Given",
+                    text: "Types of Police Vehicles giving out VI",
+                    fontSize: 16
+                  },
+                  options: { maintainAspectRatio: false }
+                }}
+              />
+            </div>
+          </div>
+
+          <div className="chart">
+            <div className="chartboarder">
+              <Bar
+                width={100}
+                height={75}
+                data={this.props.isCarModifiedData}
+                options={{
+                  scales: {
+                    xAxes: [
+                      {
+                        ticks: {
+                          min: 0,
+                          stepSize: 2
+                        }
+                      }
+                    ],
+                    yAxes: [
+                      {
+                        ticks: {
+                          min: 0,
+                          stepSize: 2
+                        }
+                      }
+                    ]
+                  },
+
+                  title: {
+                    display: this.props.displayTitle,
+                    text: "Was Car Given the VI Modified",
                     fontSize: 16
                   },
                   options: { maintainAspectRatio: false }
